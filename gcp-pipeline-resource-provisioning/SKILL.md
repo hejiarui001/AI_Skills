@@ -1,5 +1,6 @@
 ---
 name: gcp-pipeline-resource-provisioning
+version: 1.0.0
 description: |
   Automates declarative resource creation and provisioning for data pipelines, supporting BigQuery, Dataform, Dataproc, BigQuery Data Transfer Service (DTS), and other resources. It manages environment-specific configurations (dev, staging, prod) through a deployment.yaml file.
   Use when:

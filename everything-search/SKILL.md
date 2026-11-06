@@ -1,5 +1,6 @@
 ---
 name: everything-search
+version: 1.0.0
 description: >-
   Searches the user's entire Windows filesystem in sub-milliseconds using the local
   voidtools Everything engine. Use when the user asks to find, locate, or search for files,

@@ -1,5 +1,6 @@
 ---
 name: dbt-bigquery
+version: 2.0.0
 description: Expert guidance for creating, modifying, and optimizing dbt pipelines
   for BigQuery. Use this skill whenever user asks for generating or modifying a dbt
   model or project. Activate this skill when the user - Creates, modifies, or troubleshoots

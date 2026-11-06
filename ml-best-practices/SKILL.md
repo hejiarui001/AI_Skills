@@ -1,5 +1,6 @@
 ---
 name: ml-best-practices
+version: 1.0.0
 description: |
   CRITICAL RULE: You MUST use this skill whenever the task involves any machine learning tasks or data analysis.
   Use this skill if the user's prompt or requirements mention any of the following:

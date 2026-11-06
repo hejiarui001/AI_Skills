@@ -1,5 +1,6 @@
 ---
 name: git-worklog-reporter
+version: 1.0.0
 description: >-
   Extracts and transforms local Git commits, file diffs, and code statistics into structured,
   executive-ready engineering daily reports, weekly updates, and standup logs. Use when the user

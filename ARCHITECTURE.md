@@ -8,7 +8,21 @@
 
 ---
 
-## 一、 五大专业领域分区矩阵 (Domain Partition Matrix)
+## 二、 经典三段式版本号演进规范 (Semantic Versioning Specification)
+
+所有技能均严格在 `SKILL.md` 的 YAML frontmatter 中显式声明 `version: MAJOR.MINOR.PATCH`，并根据实际变更的影响程度进行版本递增：
+
+1. **`MAJOR` (主版本号 - 影响程度: 重大 / 破坏性变更)**：
+   * **触发场景**：发生破坏性变更（Breaking Changes），既有 Prompt/指令无法向下兼容；核心架构模型重构；物理/逻辑总线契约变更；
+   * **示例**：`embedded-engineering-master`: `2.0.0`，`dbt-bigquery`: `2.0.0`。
+
+2. **`MINOR` (次版本号 - 影响程度: 中度 / 功能性新增)**：
+   * **触发场景**：新增功能特性且向前兼容；新增单片机系列/驱动协议；新增排查算法/自动化脚本；
+   * **示例**：`embedded-stm32-rules`: `1.8.0`，`invoice-audit-master`: `1.9.0`，`pc-maintenance-master`: `1.3.0`，`skills-navigator`: `1.2.0`。
+
+3. **`PATCH` (修订补丁号 - 影响程度: 轻微 / 补丁修复)**：
+   * **触发场景**：细节 Bug 修复、勘误手册补丁（Errata Workaround）、参数微调、文档/注释优化；
+   * **示例**：`easyeda-api`: `1.1.64`，各基础模块修复 (`1.0.0` -> `1.0.1`)。
 
 ### 分区 01：嵌入式与硬件全栈工程 (Embedded & Hardware Suite)
 * **定位**：软硬件一体化开发、EDA 原理图校验、底层 C/C++ 规范、编译烧录与遥测联调。

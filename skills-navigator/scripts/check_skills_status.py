@@ -75,10 +75,12 @@ def parse_frontmatter(skill_md_path):
             return None
         fm_text = match.group(1)
         name_match = re.search(r'^\s*name:\s*(.+)$', fm_text, re.MULTILINE)
+        ver_match = re.search(r'^\s*version:\s*(.+)$', fm_text, re.MULTILINE)
         desc_match = re.search(r'^\s*description:\s*(?:>-\s*|\|\s*)?\n?(.+?)(?=\n\w|\Z)', fm_text, re.DOTALL | re.MULTILINE)
         name = name_match.group(1).strip() if name_match else os.path.basename(os.path.dirname(skill_md_path))
+        version = ver_match.group(1).strip() if ver_match else "1.0.0"
         desc = desc_match.group(1).strip() if desc_match else ""
-        return {"name": name, "description": desc.replace('\n', ' ')}
+        return {"name": name, "version": version, "description": desc.replace('\n', ' ')}
     except Exception:
         return None
 
@@ -107,6 +109,7 @@ def check_all_skills():
         skill_info = {
             "dir_name": entry,
             "name": meta["name"],
+            "version": meta.get("version", "1.0.0"),
             "domain": domain,
             "description": meta["description"][:120] + "..." if len(meta["description"]) > 120 else meta["description"],
             "is_git": os.path.exists(os.path.join(entry_path, ".git")),

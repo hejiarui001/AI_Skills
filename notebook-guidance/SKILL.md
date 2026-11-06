@@ -1,5 +1,6 @@
 ---
 name: notebook-guidance
+version: 1.0.0
 description: |-
   This skill guides the use of Jupyter notebooks for data analysis, exploration, and visualization, particularly with BigQuery. It outlines best practices for notebook execution and validation (supporting both cell-by-cell execution and full notebook generation depending on tool availability), library installation, and structuring notebooks for clarity. It also covers specific rules for data cleaning, plotting, and integrating with BigQuery SQL and machine learning workflows.
   Relevant when any of the following conditions are true:

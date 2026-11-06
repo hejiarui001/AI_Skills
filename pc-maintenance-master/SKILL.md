@@ -1,5 +1,6 @@
 ---
 name: pc-maintenance-master
+version: 1.3.0
 description: >-
   Comprehensive Windows PC maintenance, system diagnostics, memory optimization,
   startup app auditing, and disk cleanup toolkit for this computer. Integrates Sysinternals

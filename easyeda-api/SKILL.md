@@ -1,5 +1,6 @@
 ---
 name: easyeda-api
+version: 1.1.64
 description: >-
   EasyEDA Pro API skill for AI agents. Use when working with EasyEDA Pro EDA software,
   including PCB design, schematic editing, footprint/symbol management, and project operations.

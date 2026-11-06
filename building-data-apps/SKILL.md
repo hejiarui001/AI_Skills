@@ -1,5 +1,6 @@
 ---
 name: building-data-apps
+version: 1.0.0
 description: |
   Build modern data apps, dashboards, and interactive reports using either
   React + Vite or Streamlit. Includes optional Gemini Data Analytics chat

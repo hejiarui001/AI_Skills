@@ -1,5 +1,6 @@
 ---
 name: cortex-m-pyocd
+version: 1.0.0
 description: >-
   Controls ARM Cortex-M firmware programming, chip erasing, target discovery, and
   hardware debugging using pyOCD (located at E:\Tools\pyocd\pyocd.exe). Use when the

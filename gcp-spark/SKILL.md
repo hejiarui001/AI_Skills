@@ -1,5 +1,6 @@
 ---
 name: gcp-spark
+version: 1.0.0
 description: |
   Develops and executes Spark code on Managed Spark on Google Cloud (Dataproc Clusters and Serverless).
   Reads and writes data using BigLake Iceberg catalogs, BigQuery and Spanner.

@@ -1,5 +1,6 @@
 ---
 name: google-cloud-storage-basics
+version: 1.0.0
 description: "Stores, retrieves, and manages data as objects in Cloud Storage (Google\
   \ Cloud Storage, or GCS) buckets. Use when you need to interact with Cloud Storage\
   \ \u2014 create or configure buckets, upload, download, stream, or transfer data,\

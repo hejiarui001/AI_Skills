@@ -1,5 +1,6 @@
 ---
 name: zotero-assistant
+version: 1.0.0
 description: >-
   Connects to and searches the user's local Zotero reference library (zotero.sqlite)
   in read-only mode, locates full-text PDF attachments, and extracts research metadata.

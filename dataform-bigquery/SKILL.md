@@ -1,5 +1,6 @@
 ---
 name: dataform-bigquery
+version: 1.0.0
 description: Expertise in generating clean, correct, and efficient Dataform pipeline
   code for BigQuery ELT. Use this when creating or modifying Dataform pipelines, actions,
   or source declarations, when Dataform, SQLX, or BigQuery are mentioned in a transformation,

@@ -1,5 +1,6 @@
 ---
 name: gcp-composer-troubleshooting
+version: 1.0.0
 description: 'Provides expert guidance for troubleshooting Cloud Composer (Apache
   Airflow) and Orchestration pipelines. Use this skill when the user asks to generate
   Root Cause Analysis (RCA), troubleshoot or fix a failed pipeline, DAG in Composer

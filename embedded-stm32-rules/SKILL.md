@@ -1,5 +1,6 @@
 ---
 name: embedded-stm32-rules
+version: 1.8.0
 description: >-
   Enforces professional embedded C/C++ development guidelines and PIA (Progressive
   Instance-driven Architecture) for STM32 microcontrollers, ARM Cortex-M architecture,

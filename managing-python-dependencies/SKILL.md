@@ -1,5 +1,6 @@
 ---
 name: managing-python-dependencies
+version: 1.0.0
 description: |
   Ensures proper Python dependency management, avoiding global `pip install` and
   adhering to project-specific tooling.

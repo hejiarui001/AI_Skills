@@ -1,5 +1,6 @@
 ---
 name: data-autocleaning
+version: 1.0.0
 description: Automated data quality and transformation capabilities for Dataform/dbt/BigQuery
   pipelines. Processes data sourced from BigQuery or Cloud Storage (GCS), applying
   best practices for data ingestion, movement, schema mapping, and comprehensive data

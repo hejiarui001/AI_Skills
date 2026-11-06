@@ -1,5 +1,6 @@
 ---
 name: federate-lakehouse-catalog
+version: 1.0.0
 description: 'Sets up Google Cloud Lakehouse federated catalogs to remote Iceberg
   REST Catalogs. Currently supported catalogs: Databricks Unity, AWS Glue. Supported
   clouds hosting those catalogs: GCP, AWS. The primary use case is connecting to remote

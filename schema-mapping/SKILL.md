@@ -1,5 +1,6 @@
 ---
 name: schema-mapping
+version: 1.0.0
 license: Apache-2.0
 description: Guides the process of analyzing, mapping, and documenting transformations
   between source and target schemas for any database, data warehouse, or data platform.

@@ -1,5 +1,6 @@
 ---
 name: accidental-data-loss-prevention
+version: 1.0.0
 description: |
   **STOP AND VERIFY**: Before running any command or tool that results in irreversible data loss, you MUST obtain explicit user consent.
   When in doubt, ask. It is better to wait for confirmation than to accidentally delete production data or critical project assets.

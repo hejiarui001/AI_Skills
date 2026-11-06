@@ -1,5 +1,6 @@
 ---
 name: enforcing-resource-attribution
+version: 1.0.0
 description: 'Enforces resource attribution for CLI commands. Use this skill whenever
   you are running `bq` or `gcloud` commands via `run_command`. It ensures mandatory
   labeling for supported `bq` operations while avoiding invalid flags on read-only

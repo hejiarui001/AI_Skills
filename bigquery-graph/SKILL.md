@@ -1,5 +1,6 @@
 ---
 name: bigquery-graph
+version: 1.0.0
 description: Provides guidelines and best practices for querying and defining property
   graphs and semantic graphs in BigQuery using GQL (Graph Query Language). Use when
   creating property graphs or querying graph topologies in BigQuery.

@@ -1,5 +1,6 @@
 ---
 name: skill-repair
+version: 1.0.0
 description: |
   Use this to fix and re-install agent skills that have failed installation.
   This skill provides the necessary context and permissions to surgically update

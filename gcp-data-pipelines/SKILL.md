@@ -1,5 +1,6 @@
 ---
 name: gcp-data-pipelines
+version: 1.0.0
 description: 'Primary entry point for building, managing, and orchestrating data pipelines
   on Google Cloud. Guides users to the appropriate skill for dbt, Dataflow (Apache
   Beam), Dataform, Spark (Dataproc Serverless), BigQuery Data Transfer Service (DTS)

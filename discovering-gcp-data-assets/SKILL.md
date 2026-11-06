@@ -1,5 +1,6 @@
 ---
 name: discovering-gcp-data-assets
+version: 1.0.0
 description: |
   Finds and inspects data assets within Google Cloud.
   Relevant when any of the following conditions are true:

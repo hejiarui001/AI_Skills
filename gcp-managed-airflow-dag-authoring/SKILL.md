@@ -1,5 +1,6 @@
 ---
 name: gcp-managed-airflow-dag-authoring
+version: 1.0.0
 description: Guides the authoring and validation of Apache Airflow DAGs for Managed
   Service for Apache Airflow (MSAA; formerly Cloud Composer). Covers environment context
   discovery, Airflow 2 vs 3 compatibility, authoring best practices, and local/remote

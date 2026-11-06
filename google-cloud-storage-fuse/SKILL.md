@@ -1,5 +1,6 @@
 ---
 name: google-cloud-storage-fuse
+version: 1.0.0
 description: "Mounts Cloud Storage buckets as a POSIX file system with Cloud Storage\
   \ FUSE (gcsfuse). Use when you need to interact with gcsfuse \u2014 decide whether\
   \ FUSE, native gs:// reads, or Filestore/Managed Lustre fits a workload, deploy\

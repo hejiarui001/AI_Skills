@@ -1,5 +1,6 @@
 ---
 name: bigtable-basics
+version: 1.0.0
 description: Assists in provisioning instances/tables, designing performant schemas,
   and querying data in Bigtable. Use when designing Bigtable row keys, configuring
   column families, writing SQL queries or client library code (Java, Go, Python) for

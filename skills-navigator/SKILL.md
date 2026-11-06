@@ -1,5 +1,6 @@
 ---
 name: skills-navigator
+version: 1.2.0
 description: >-
   Skills command center, update monitor, and quick navigation guide. Trigger when the
   user says "指令", "命令", "技能", "技能清单", "有哪些技能", "怎么用", "快捷指令", "检查更新",

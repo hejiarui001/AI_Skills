@@ -1,5 +1,6 @@
 ---
 name: gcp-managed-airflow-recommendations
+version: 1.0.0
 description: Provides recommendations and best practices for creating, configuring,
   tuning and optimizing Managed Service for Apache Airflow (MSAA, Cloud Composer)
   environments. Use when the user asks for guidance, recommendations, or best practices

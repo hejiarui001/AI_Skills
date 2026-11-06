@@ -1,5 +1,6 @@
 ---
 name: google-cloud-storage-bucket-architect
+version: 1.0.0
 description: "Creates Cloud Storage (Google Cloud Storage, or GCS) buckets. Analyzes\
   \ the workload (sensitive data, media hosting, ingestion, web hosting, archiving,\
   \ backup, logging, analytics, AI/ML, or general-purpose), validates project-level\

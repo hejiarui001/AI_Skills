@@ -1,5 +1,6 @@
 ---
 name: gcs-security-assessment
+version: 1.0.0
 description: "Assesses the security posture of Google Cloud Storage (GCS) buckets\
   \ and projects. Grounds every finding in gathered telemetry, evaluates buckets against\
   \ Google security best practices (public access, IAM over-granting, CMEK, VPC Service\

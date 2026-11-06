@@ -1,5 +1,6 @@
 ---
 name: bigquery-data-transfer-service
+version: 1.0.0
 description: Discovers and inspects BigQuery Data Transfer Service (DTS) configurations.
   Use this to identify existing ingestion pipelines and extract datasource or transfer
   config metadata for data pipelines. Use when a user asks for ingestion scenarios

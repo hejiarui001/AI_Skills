@@ -1,5 +1,6 @@
 ---
 name: industrial-serial-agent
+version: 1.0.0
 description: >-
   Provides industrial-grade serial (UART / COM port) device discovery, command transmission,
   and log capture using pyserial (3.5k+ stars). Use when the user asks to scan available COM

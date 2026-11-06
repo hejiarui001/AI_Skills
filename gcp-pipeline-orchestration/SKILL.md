@@ -1,5 +1,6 @@
 ---
 name: gcp-pipeline-orchestration
+version: 1.0.0
 description: This skill helps the agent generate or update orchestration pipeline
   definitions for Google Cloud Composer to initialize orchestration pipeline or update
   the orchestration definition for orchestration of various data pipelines, like dbt
