@@ -90,5 +90,26 @@ git push origin main
 
 ---
 
-## 四、 持续演进准则 (Skill Evolution Protocol)
-每次排查硬件踩坑、新增上位机协议、确立新研发风格或接入新工具链后，经用户确认即时提炼入对应的 `SKILL.md`，并直接在此仓库中版本化提交推送到 GitHub。
+## 四、 持续演进与双端协同准则 (Skill Evolution & Dual-OS Sync Protocol)
+
+在 Windows 11 与 Linux (Ubuntu) 双系统交叉开发场景下，遵循 **Fetch-Analyze-Merge-Push（云端检视 -> 增量分析 -> 本地融合 -> 提交推送）** 军规：
+
+### 1. 更新前强制远端检视 (Pre-Update Remote Inspection)
+在任何一次技能修改、新增或提交前，**必须首先探测云端仓库**：
+```bash
+# 检查云端是否有另一系统提交的新版本
+python Tools/sync_skills.py check
+```
+
+### 2. 远端增量先拉取后分析 (Pull & Analyze)
+若云端存在超前提交（Behind > 0）：
+1. **自动拉取**：执行 `git pull origin main`；
+2. **结构化梳理**：系统自动输出变更报告（变更涉及哪个具体技能、修改/新增了何种文件、另一端的提交信息）；
+3. **经验与规约融合**：将远端已更新的代码逻辑或规约与本地当前需求进行综合分析，避免覆盖回退与逻辑冲突。
+
+### 3. 融合校验后再行提交上传 (Synthesize then Push)
+在确保本地与云端逻辑融为一体后，再执行最终推送：
+```bash
+python Tools/sync_skills.py push -m "feat: [技能名] 优化与多端融合"
+```
+工具会自动在推送前进行二次云端探活拦截，杜绝非快进（non-fast-forward）冲突。
