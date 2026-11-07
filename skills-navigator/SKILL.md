@@ -1,6 +1,6 @@
 ---
 name: skills-navigator
-version: 1.2.0
+version: 1.3.0
 description: >-
   Skills command center, update monitor, and quick navigation guide. Trigger when the
   user says "指令", "命令", "技能", "技能清单", "有哪些技能", "怎么用", "快捷指令", "检查更新",
@@ -9,7 +9,7 @@ description: >-
   proactively guides user workflow.
 license: Apache-2.0
 metadata:
-  version: v1.2.0
+  version: v1.3.0
   author: Antigravity
 ---
 
@@ -67,11 +67,12 @@ When the user triggers this skill:
      - *“检查物料目录发票查重、序号连续性与红包差额”*
    * 🎨 **嘉立创EDA 官方联动 (`easyeda-api`)**:
      - *“在嘉立创EDA里把选中的网络标号批量改成 VCC_3V3”*
-   * 💻 **电脑体检与维护医生 (`pc-maintenance-master`)**:
+   * 💻 **电脑体检与全量工具箱管家 (`pc-maintenance-master`)**:
      - *“帮我全面体检一下电脑状态和内存占用”*
      - *“安全清理一下系统临时垃圾”*
      - *“运行系统安全态势与端口审计”*
-     - *“打开 WizTree / RAMMap / Autoruns / Process Explorer”*
+     - *“打开 WizTree / RAMMap / Carnac / 格式工厂”*
+     - *“查一下我电脑里的工具箱清单与分类”*
 
 3. **Handle One-Click Updates**:
    When the user asks to update a skill (e.g. "更新嘉立创技能" or "更新技能"):

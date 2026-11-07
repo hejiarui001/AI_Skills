@@ -35,8 +35,8 @@
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
 | **`invoice-audit-master`** | `1.9.0` | 高校/竞赛发票全生命周期智能审计、对账凑单与 11 列报销总账生成 | [SKILL.md](./invoice-audit-master/SKILL.md) |
-| **`pc-maintenance-master`** | `1.3.0` | Sysinternals 内存优化、启动项体检、服务治理与磁盘深度清理 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
-| **`skills-navigator`** | `1.2.0` | 技能总控台、快捷命令索引、版本健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
+| **`pc-maintenance-master`** | `2.0.0` | 全量工具箱架构治理、Sysinternals 内存优化、启动项体检与磁盘深度清理 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
+| **`skills-navigator`** | `1.3.0` | 技能总控台、快捷命令索引、版本健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
 | **`everything-search`** | `1.0.0` | voidtools Everything 本地全盘毫秒级极速检索与文件调阅 | [SKILL.md](./everything-search/SKILL.md) |
 | **`zotero-assistant`** | `1.0.0` | Zotero 本地文献库只读检索、芯片 Datasheet 与学术元数据调阅 | [SKILL.md](./zotero-assistant/SKILL.md) |
 | **`git-worklog-reporter`** | `1.0.0` | 本地 Git 提交提取与高管级研发日报/周报结构化撰写 | [SKILL.md](./git-worklog-reporter/SKILL.md) |
