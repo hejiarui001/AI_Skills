@@ -1,6 +1,6 @@
 ---
 name: embedded-engineering-master
-version: 2.0.0
+version: 2.1.0
 description: >-
   Flagship full-stack embedded hardware & software engineering orchestrator for STM32, ARM Cortex-M, and ESP32/RISC-V microcontrollers.
   Unifies the complete end-to-end hardware-software pipeline: EasyEDA circuit/pinout verification -> UCA/PIA multi-tier firmware architecture -> Headless compilation (Keil/CMake/idf.py) -> pyOCD/esptool hardware flashing -> industrial serial telemetry (UART/VOFA+) -> milestone checkpointing.
@@ -8,7 +8,7 @@ description: >-
   Trigger when the user asks for end-to-end embedded development, hardware-software co-debugging, full-chain feature delivery, board bring-up, or full lifecycle diagnostics (e.g., "全链路开发", "端到端调通", "从原理图到板子跑通", "板子死机全系统排查", "软硬件全栈闭环").
 license: Apache-2.0
 metadata:
-  version: v2.0.0
+  version: v2.1.0
   role: Master Orchestrator
 ---
 
@@ -91,7 +91,8 @@ flowchart TD
 ### 阶段 1：硬件图纸与引脚核对 (Hardware Grounding)
 1. 检查根目录 [`SOFTWARE_SPEC.md`](file:///E:/ST/STM32_WorkSpace/F103c8t6_qibeng/SOFTWARE_SPEC.md) 或调用 [`easyeda-api`](file:///C:/Users/hejia/.gemini/config/skills/easyeda-api/SKILL.md) 读取原理图；
 2. 确认被控对象的物理位号、MCU GPIO 引脚编号、工作极性；
-3. **多路/矩阵防短路审查**：核查是否存在多个不同电源/通道并联可能引发短路的拓扑，强制建立排他性互斥规则。
+3. **多路/矩阵防短路审查**：核查是否存在多个不同电源/通道并联可能引发短路的拓扑，强制建立排他性互斥规则；
+4. **电源与外围芯片工作模式引脚核验 (PMIC Mode Pin Grounding)**：针对 PMIC、电池充电芯片（如 MP2672、BQ 系列）或专用接口 IC，严格核验模式配置引脚（如 `CV`、`PROG`、`MODE`）。杜绝误接地/误下拉进入 Standalone 自主硬件模式导致 I2C 从机逻辑被完全关闭（表现为总线全地址 NACK）；确认上拉进入 Host-Control 主机控制模式方可进行总线通信。
 
 ### 阶段 2：固件架构选择与编码 (Firmware Engineering)
 1. **执行架构自主分级**：根据目标芯片 Flash/RAM 与复杂度选择【极简紧凑模式】或【UCA 综合组件模式】；
@@ -99,7 +100,8 @@ flowchart TD
 3. **安全责任链与矩阵控制**：
    - 功率开启前挂载阶梯短路微脉冲探测（`ShortCircuitDetect`）；
    - 矩阵与通道切换强制走 **Break-Before-Make（先断后合）**与死区延时（Dead-time）；
-   - 详细接口与目录规约见 [UCA 架构规范文档](references/uca_architecture_spec.md)。
+   - 详细接口与目录规约见 [UCA 架构规范文档](references/uca_architecture_spec.md)；
+4. **I2C 总线自愈与死锁防范 (9-Clock Recovery & AF Remapping)**：涉及 I2C 传感器与电源芯片时，必须注入标准 9-Clock GPIO 解死锁时序，并强制做 `GPIO_MODE_AF_OD` 复用回切与 `HAL_I2C_DeInit()` 状态机复位，防止从机钳位 SDA 导致总线卡死在 BUSY 状态。
 
 ### 阶段 3：自动化静默编译 (Headless Build)
 根据工程类型选择对应的无头构建引擎：

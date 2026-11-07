@@ -1,6 +1,6 @@
 ---
 name: embedded-stm32-rules
-version: 1.8.0
+version: 1.9.0
 description: >-
   Enforces professional embedded C/C++ development guidelines and PIA (Progressive
   Instance-driven Architecture) for STM32 microcontrollers, ARM Cortex-M architecture,
@@ -9,7 +9,7 @@ description: >-
   cooperative time-sliced task schedulers, FreeRTOS integration, or VOFA+ debugging protocols.
 license: Apache-2.0
 metadata:
-  version: v1.8.0
+  version: v1.9.0
   source: awesome-cursorrules-embedded & PIA Architecture Standard
 ---
 
@@ -68,6 +68,11 @@ When generating or reviewing code for STM32 / MCU platforms, the agent must foll
      - Full resolution guide: [armclang_cmsis_dsp_compatibility.md](./references/armclang_cmsis_dsp_compatibility.md).
 9. **Validation**:
    - Run the linting script [check_c_embedded_rules.py](./scripts/check_c_embedded_rules.py) against generated files when needed to ensure zero rule violations.
+10. **I2C Bus Deadlock Recovery & PMIC Mode Verification Protocol**:
+   - When driving I2C peripherals (sensors, EEPROM, battery chargers, PMICs), implement 9-clock bus recovery (`I2C_Bus_Recover()`) to clear slave SDA deadlock before initializing I2C hardware.
+   - **Dual Trap Prevention**: After emitting 9 pulses, explicitly re-initialize GPIO pins to `GPIO_MODE_AF_OD` (`GPIO_AF4_I2C1`) and call `HAL_I2C_DeInit()` to restore the HAL state machine to `HAL_I2C_STATE_RESET` before invoking `HAL_I2C_Init()`.
+   - **PMIC Hardware Mode Pin Check**: When interfacing PMICs (e.g., MP2672, BQ series), verify mode selection pins (e.g. `CV` pin) are pulled up to internal VCC for Host-Control mode; pull-downs force standalone autonomous mode where I2C slave is completely disabled and returns NACK.
+   - Full protocol guide: [i2c_bus_recovery_and_pwr_traps.md](./references/i2c_bus_recovery_and_pwr_traps.md).
 
 ---
 
@@ -85,6 +90,8 @@ Refer to the following guides for concrete implementations and protocol details:
   See [UART DMA Pattern](./references/stm32_uart_dma_pattern.md) for circular buffer implementations and modern `HAL_UARTEx_ReceiveToIdle_DMA` workflows.
 * **ADC Sensor & Power Sampling Patterns**:
   See [ADC Filtering Patterns](./references/adc_filtering_patterns.md) for dual-option filtering specification (Composite anti-spike adaptive IIR vs Low-quantization bit-shift) and macro switch templates.
+* **I2C Bus Recovery & PMIC Mode Traps**:
+  See [I2C Bus Recovery & PMIC Traps Guide](./references/i2c_bus_recovery_and_pwr_traps.md) for 9-clock bus deadlock clearing, AF4 alternate function re-mapping traps, and PMIC standalone vs host-control mode pins.
 * **HardFault Diagnostics**:
   See [HardFault Diagnostics Reference](./references/hardfault_diagnostics.md) for assembly exception dump handlers and root cause register analysis.
 * **ArmClang 6 & CMSIS-DSP Toolchain Compatibility**:
@@ -106,6 +113,7 @@ Before presenting embedded code to the user, verify:
 - [ ] All hardware registers and interrupt-shared variables are declared `volatile`.
 - [ ] Multi-channel peripherals use handle-based structs (`Actuator_t*`) rather than duplicate hardcoded functions.
 - [ ] ADC sampling applies appropriate filtering pattern (Option A: Adaptive composite for motors vs Option B: Low-quantization bit-shift for resistive/slow signals).
+- [ ] I2C bus recovery includes 9-clock pulse clearing, explicit `GPIO_MODE_AF_OD` remapping, and `HAL_I2C_DeInit()` state reset; PMIC mode pins are verified before assuming bus/IC hardware damage.
 - [ ] Project root contains or synchronizes `SOFTWARE_SPEC.md` documenting task schedules, electrical pinouts, and upgrade partitions.
 - [ ] Peripheral clock is enabled before peripheral registers are accessed.
 - [ ] Status return value `HAL_StatusTypeDef` is checked on critical initializations.
