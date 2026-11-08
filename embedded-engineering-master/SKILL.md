@@ -1,6 +1,6 @@
 ---
 name: embedded-engineering-master
-version: 2.2.0
+version: 2.3.0
 description: >-
   Flagship full-stack embedded hardware & software engineering orchestrator for STM32, ARM Cortex-M, and ESP32/RISC-V microcontrollers.
   Unifies the complete end-to-end hardware-software pipeline: EasyEDA circuit/pinout verification -> UCA/PIA multi-tier firmware architecture -> Headless compilation (Keil/CMake/idf.py) -> pyOCD/esptool hardware flashing -> industrial serial telemetry (UART/VOFA+) -> milestone checkpointing.
@@ -8,7 +8,7 @@ description: >-
   Trigger when the user asks for end-to-end embedded development, hardware-software co-debugging, full-chain feature delivery, board bring-up, or full lifecycle diagnostics (e.g., "全链路开发", "端到端调通", "从原理图到板子跑通", "板子死机全系统排查", "软硬件全栈闭环").
 license: Apache-2.0
 metadata:
-  version: v2.1.0
+  version: v2.3.0
   role: Master Orchestrator
 ---
 
@@ -105,7 +105,11 @@ flowchart TD
    - 详细接口与目录规约见 [UCA 架构规范文档](references/uca_architecture_spec.md)；
 4. **I2C 总线自愈与死锁防范 (9-Clock Recovery & AF Remapping)**：涉及 I2C 传感器与电源芯片时，必须注入标准 9-Clock GPIO 解死锁时序，并强制做 `GPIO_MODE_AF_OD` 复用回切与 `HAL_I2C_DeInit()` 状态机复位，防止从机钳位 SDA 导致总线卡死在 BUSY 状态。
 5. **过渡期脚手架即时物理拆除规约 (Scaffolding Deconstruction Standard)**：带板联调中为确认屏幕尺寸、外设通道所引入的过渡期脚手架代码（如多尺寸轮播数组、对比测试函数），在硬件规格一旦被闭环确认后，必须在当前周期内彻底物理删除，杜绝死代码污染生产工程；
-6. **外设驱动单文件 400 行解耦**：屏幕驱动等大初始化数组必须外置至 `*_cfg.h`，主驱动收敛在 300 行内，严禁将宿主机环境（如 `COM5`）硬编码至设备 UI。
+6. **外设驱动单文件 400 行解耦**：屏幕驱动等大初始化数组必须外置至 `*_cfg.h`，主驱动收敛在 300 行内，严禁将宿主机环境（如 `COM5`）硬编码至设备 UI；
+7. **上下位机原子同步契约 (Dual-End Atomic Synchronization Standard)**：
+   * **契约先行 (Contract First)**：系统 UI 模式、遥测数据帧、控制指令必须首先在 MCU 中央黑板或通信服务头文件（如 `sys_blackboard.h` / `proto_*.h`）中显式定义枚举（如 `UiMode_t`），严禁使用裸写魔数；
+   * **双端原子协同演进**：下位机固件新增功能、重构状态机或调整遥测帧格式时，上位机 UI、数据模型与命令解析必须在同一迭代内同步交付，严禁单端推进导致协议漂移；
+   * **遗留技术债务清零**：功能重构完成后，必须全量物理清除上位机与下位机中的历史容错遗迹（如旧轮播残留、过时函数命名 `resume_carousel`、旧模式号容错映射），确保双端语义绝对统一。
 
 ### 阶段 3：自动化静默编译 (Headless Build)
 根据工程类型选择对应的无头构建引擎：
@@ -123,9 +127,17 @@ flowchart TD
    * 极简模式：输出 VOFA+ JustFloat 尾帧（`\x00\x00\x80\x7F`）；
    * 综合模式：三合一协议引擎（遥测波形 + 参数读写 + RPC 控制帧）。
 
-### 阶段 6：节点复位快照归档与说明书同步 (Snapshot & Spec)
-1. 运行 `embedded_checkpoint.py` 固化成果；
-2. 同步更新根目录 [`SOFTWARE_SPEC.md`](file:///E:/ST/STM32_WorkSpace/F103c8t6_qibeng/SOFTWARE_SPEC.md)。
+### 阶段 6：工程自洁收尾、健康审计与快照归档 (Hygiene, Audit & Snapshot DoD)
+任何功能开发、问题排查或架构调整交付前，必须执行三步交付自检（Definition of Done）：
+1. **工作区卫生自洁 (Workspace Hygiene)**：
+   * 清理零散日志：立即清除根目录与构建目录下的 `.log`、临时 `.txt`、`.tmp`、调试备份等中间脏污；
+   * 权威资料去重归位：所有硬件/软件规格书统一归入 `docs/`，严禁在根目录并存重复副本；根目录提供统一入口 `README.md`；
+   * 工具链权责严密分立：MCU 固件构建与字库脚本统一归入 `Tools/Firmware/`，严禁污染 `Host/` 上位机目录。
+2. **自动化工程健康度审计**：
+   * 运行工程内置审计工具（如 `python Tools/check_project_health.py`），核验目录干净度、架构层级完整性与上下位机协议一致性，确保 100% 审计通过。
+3. **节点复位快照归档与说明书同步**：
+   * 运行 `embedded_checkpoint.py` 固化关键里程碑快照；
+   * 同步更新 `docs/SOFTWARE_SPEC.md` 与工程根目录 [`README.md`](file:///E:/ST/STM32_WorkSpace/F103c8t6_qibeng/SOFTWARE_SPEC.md)。
 
 ---
 
