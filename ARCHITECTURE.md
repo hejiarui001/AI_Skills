@@ -53,20 +53,22 @@
 
 ---
 
-### 分区 04：云原生、大数据与数据管道 (GCP & BigData Cloud Suite)
-* **定位**：Google Cloud 官方数据工程生态（分析、数仓、流批一体与存储架构）。
+### 分区 04：云原生大数据工程 (GCP Cloud & BigData Master Suite - 5 大提纯套件)
+* **定位**：Google Cloud 官方数据工程全栈生态（分析、数仓、流批一体、存储架构、声明式调度与元数据治理）。
 * **涵盖技能**：
-  * BigQuery 系列：`bigquery-ai-ml`, `bigquery-bigframes`, `bigquery-data-transfer-service`, `bigquery-graph`, `bigquery-sql`
-  * 管道与调度：`dbt-bigquery`, `dataform-bigquery`, `gcp-data-pipelines`, `gcp-dataflow`, `gcp-spark`, `gcp-pipeline-orchestration`, `gcp-managed-airflow-*`
-  * 存储与安全：`google-cloud-storage-basics`, `google-cloud-storage-bucket-architect`, `google-cloud-storage-fuse`, `gcs-security-assessment`
+  * [`bigquery-master`](./bigquery-master/SKILL.md)：BigQuery 统一技术中枢（SQL 调优、BigFrames、属性图 GQL、数据传输 DTS、内置 GenAI/ML）；
+  * [`gcs-storage-suite`](./gcs-storage-suite/SKILL.md)：GCS 统一存储中枢（架构设计 Bucket Architect、POSIX FUSE 高性能挂载、安全水位审计 Security Assessment）；
+  * [`gcp-airflow-composer-suite`](./gcp-airflow-composer-suite/SKILL.md)：Composer / Airflow 调度总成（现代 DAG 编写、弹性伸缩、Airflow 2/3 迁移、端到端 RCA 排障与声明式部署）；
+  * [`gcp-data-engineering`](./gcp-data-engineering/SKILL.md)：全栈数据管道工程（dbt / Dataform 双轨 SQLX 建模、Beam Dataflow、Dataproc Spark 流批一体、Data Clean 质检、Lakehouse 与 Bigtable）；
+  * [`gcp-governance-assets`](./gcp-governance-assets/SKILL.md)：GCP 治理与数据应用开发（ADC 认证前置校验、资源标签强制注入、资产拓扑发现、Schema 映射与前端数据大屏）。
 
 ---
 
-### 分区 05：Agent 运行治理与元能力 (Governance & Meta-Skills Suite)
-* **定位**：Agent 自主运行保护屏障、Python 依赖防污染、数据安全与技能导航。
+### 分区 05：Agent 运行治理与元能力 (Governance & Meta-Skills Suite - 5 项)
+* **定位**：Agent 自主运行保护屏障、Python 依赖防污染、数据安全、科学建模规范与技能导航。
 * **涵盖技能**：
-  * [`skills-navigator`](./skills-navigator/SKILL.md)：技能中枢控制台、更新检测与智能路线指引；
-  * [`accidental-data-loss-prevention`](./accidental-data-loss-prevention/SKILL.md)：高危销毁指令拦截（DROP/RM/DELETE）；
-  * [`managing-python-dependencies`](./managing-python-dependencies/SKILL.md)：全局环境防污染与虚拟环境守则；
-  * [`ml-best-practices`](./ml-best-practices/SKILL.md) & [`notebook-guidance`](./notebook-guidance/SKILL.md)：数据科学与交互式笔记本规范；
-  * [`skill-repair`](./skill-repair/SKILL.md)：技能安装异常诊断与修复。
+  * [`notebook-data-science`](./notebook-data-science/SKILL.md)：数据科学与交互式笔记本规范（机器学习建模评估与 Jupyter Notebook 交互式规约）；
+  * [`skills-navigator`](./skills-navigator/SKILL.md)：技能总控台、快捷命令索引、21 大精炼技能健康度多维扫描与主动升级监测；
+  * [`accidental-data-loss-prevention`](./accidental-data-loss-prevention/SKILL.md)：高危破坏性操作防御机制（DROP / RM / DELETE 强制拦截确认）；
+  * [`managing-python-dependencies`](./managing-python-dependencies/SKILL.md)：Python 环境依赖治理与虚拟环境防全局污染守则；
+  * [`skill-repair`](./skill-repair/SKILL.md)：Agent 技能安装依赖异常诊断与 manifest 自动修复引擎。

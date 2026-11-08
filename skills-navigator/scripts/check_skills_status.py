@@ -26,19 +26,12 @@ DOMAINS = {
         "google-sync-guard"
     ],
     "04_GCP_Data_Cloud": [
-        "bigquery-ai-ml", "bigquery-bigframes", "bigquery-data-transfer-service",
-        "bigquery-graph", "bigquery-sql", "bigtable-basics", "building-data-apps",
-        "data-autocleaning", "dataform-bigquery", "dbt-bigquery", "discovering-gcp-data-assets",
-        "federate-lakehouse-catalog", "gcp-composer-troubleshooting", "gcp-data-pipelines",
-        "gcp-dataflow", "gcp-managed-airflow-dag-authoring", "gcp-managed-airflow-migrations",
-        "gcp-managed-airflow-recommendations", "gcp-pipeline-orchestration",
-        "gcp-pipeline-resource-provisioning", "gcp-spark", "gcs-security-assessment",
-        "google-cloud-auth-verification", "google-cloud-storage-basics",
-        "google-cloud-storage-bucket-architect", "google-cloud-storage-fuse"
+        "bigquery-master", "gcs-storage-suite", "gcp-airflow-composer-suite",
+        "gcp-data-engineering", "gcp-governance-assets"
     ],
     "05_Governance_Meta": [
-        "skills-navigator", "accidental-data-loss-prevention", "managing-python-dependencies",
-        "ml-best-practices", "notebook-guidance", "schema-mapping", "skill-repair"
+        "skills-navigator", "notebook-data-science", "accidental-data-loss-prevention",
+        "managing-python-dependencies", "skill-repair"
     ]
 }
 
