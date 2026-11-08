@@ -59,7 +59,7 @@
 | 技能标识 | 当前版本 | 整合吸收的原技能 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- | :--- |
 | **`notebook-data-science`** | `2.0.0` | `ml-best-practices`<br>`notebook-guidance` | **数据科学与交互式笔记本规范**：机器学习建模评估范式 (ML Best Practices) 与 Jupyter Notebook 交互式数据分析规约 | [SKILL.md](./notebook-data-science/SKILL.md) |
-| **`skills-navigator`** | `1.3.0` | - | 技能总控台、快捷命令索引、21 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
+| **`skills-navigator`** | `1.4.0` | - | 技能总控台、快捷命令索引、21 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
 | **`accidental-data-loss-prevention`**| `1.0.0` | - | 高危破坏性操作防御机制（DROP / RM / DELETE 强制拦截确认） | [SKILL.md](./accidental-data-loss-prevention/SKILL.md) |
 | **`managing-python-dependencies`** | `1.0.0` | - | Python 环境依赖治理与虚拟环境防全局污染守则 | [SKILL.md](./managing-python-dependencies/SKILL.md) |
 | **`skill-repair`** | `1.0.0` | - | Agent 技能安装依赖异常诊断与 manifest 自动修复引擎 | [SKILL.md](./skill-repair/SKILL.md) |
