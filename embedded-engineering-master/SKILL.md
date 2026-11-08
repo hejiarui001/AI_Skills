@@ -1,6 +1,6 @@
 ---
 name: embedded-engineering-master
-version: 2.1.0
+version: 2.2.0
 description: >-
   Flagship full-stack embedded hardware & software engineering orchestrator for STM32, ARM Cortex-M, and ESP32/RISC-V microcontrollers.
   Unifies the complete end-to-end hardware-software pipeline: EasyEDA circuit/pinout verification -> UCA/PIA multi-tier firmware architecture -> Headless compilation (Keil/CMake/idf.py) -> pyOCD/esptool hardware flashing -> industrial serial telemetry (UART/VOFA+) -> milestone checkpointing.
@@ -93,6 +93,8 @@ flowchart TD
 2. 确认被控对象的物理位号、MCU GPIO 引脚编号、工作极性；
 3. **多路/矩阵防短路审查**：核查是否存在多个不同电源/通道并联可能引发短路的拓扑，强制建立排他性互斥规则；
 4. **电源与外围芯片工作模式引脚核验 (PMIC Mode Pin Grounding)**：针对 PMIC、电池充电芯片（如 MP2672、BQ 系列）或专用接口 IC，严格核验模式配置引脚（如 `CV`、`PROG`、`MODE`）。杜绝误接地/误下拉进入 Standalone 自主硬件模式导致 I2C 从机逻辑被完全关闭（表现为总线全地址 NACK）；确认上拉进入 Host-Control 主机控制模式方可进行总线通信。
+5. **硬件时钟源三方交叉核验 (Clock Triangulation Rule)**：排查或配置系统时钟树时，严禁单凭早期文档文字断定外部晶振频率。必须对齐“实物 BOM 丝印型号 ∩ CubeMX `.ioc` (HSE_VALUE) ∩ 运行时代码寄存器 (PLLM)”，核验三者严格一致方可进行分频倍频配置；
+6. **CubeMX `.ioc` 强同步防覆写免疫 (Zero-Patch Overwrite Immunity)**：所有 GPIO 内部上拉/下拉、外设工作模式（SPI/I2C/UART）与时钟分频，必须反向固化至 `.ioc` 配置文件中。严禁在生成文件（`Core/Src/`）中仅做手工临时补丁，彻底防范用户重新 GENERATE CODE 时手改代码全盘被冲掉。
 
 ### 阶段 2：固件架构选择与编码 (Firmware Engineering)
 1. **执行架构自主分级**：根据目标芯片 Flash/RAM 与复杂度选择【极简紧凑模式】或【UCA 综合组件模式】；
@@ -102,6 +104,8 @@ flowchart TD
    - 矩阵与通道切换强制走 **Break-Before-Make（先断后合）**与死区延时（Dead-time）；
    - 详细接口与目录规约见 [UCA 架构规范文档](references/uca_architecture_spec.md)；
 4. **I2C 总线自愈与死锁防范 (9-Clock Recovery & AF Remapping)**：涉及 I2C 传感器与电源芯片时，必须注入标准 9-Clock GPIO 解死锁时序，并强制做 `GPIO_MODE_AF_OD` 复用回切与 `HAL_I2C_DeInit()` 状态机复位，防止从机钳位 SDA 导致总线卡死在 BUSY 状态。
+5. **过渡期脚手架即时物理拆除规约 (Scaffolding Deconstruction Standard)**：带板联调中为确认屏幕尺寸、外设通道所引入的过渡期脚手架代码（如多尺寸轮播数组、对比测试函数），在硬件规格一旦被闭环确认后，必须在当前周期内彻底物理删除，杜绝死代码污染生产工程；
+6. **外设驱动单文件 400 行解耦**：屏幕驱动等大初始化数组必须外置至 `*_cfg.h`，主驱动收敛在 300 行内，严禁将宿主机环境（如 `COM5`）硬编码至设备 UI。
 
 ### 阶段 3：自动化静默编译 (Headless Build)
 根据工程类型选择对应的无头构建引擎：

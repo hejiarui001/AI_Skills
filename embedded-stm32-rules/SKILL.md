@@ -1,6 +1,6 @@
 ---
 name: embedded-stm32-rules
-version: 1.9.0
+version: 1.10.0
 description: >-
   Enforces professional embedded C/C++ development guidelines and PIA (Progressive
   Instance-driven Architecture) for STM32 microcontrollers, ARM Cortex-M architecture,
@@ -73,6 +73,15 @@ When generating or reviewing code for STM32 / MCU platforms, the agent must foll
    - **Dual Trap Prevention**: After emitting 9 pulses, explicitly re-initialize GPIO pins to `GPIO_MODE_AF_OD` (`GPIO_AF4_I2C1`) and call `HAL_I2C_DeInit()` to restore the HAL state machine to `HAL_I2C_STATE_RESET` before invoking `HAL_I2C_Init()`.
    - **PMIC Hardware Mode Pin Check**: When interfacing PMICs (e.g., MP2672, BQ series), verify mode selection pins (e.g. `CV` pin) are pulled up to internal VCC for Host-Control mode; pull-downs force standalone autonomous mode where I2C slave is completely disabled and returns NACK.
    - Full protocol guide: [i2c_bus_recovery_and_pwr_traps.md](./references/i2c_bus_recovery_and_pwr_traps.md).
+11. **CubeMX `.ioc` Dual-Directional Synchronization & Anti-Overwrite Protocol**:
+    - Never rely on manual code patches in generated toolchain directories (`Core/Src/gpio.c`, `Core/Src/i2c.c`, etc.).
+    - All electrical pin attributes (Internal Pull-Up, Open-Drain, Speed) and peripheral clock parameters must be explicitly committed back into the `.ioc` configuration file.
+    - Ensure that running CubeMX "GENERATE CODE" will never wipe out hardware critical setups or cause floating bus/pin states.
+12. **Scaffolding Deconstruction & Physical Code Pruning Standard**:
+    - During hardware bring-up, auxiliary scaffolding (multi-resolution carousels, test patterns, probing loops) may be introduced.
+    - Once the physical hardware specification is confirmed or the user instructs negative pruning ("把其他模式删掉"), all temporary tables, test routines, and obsolete commands must be physically removed from production code within the same delivery cycle.
+    - Keep driver files modularized under 400 lines (offload large init arrays to `*_cfg.h`), and never hardcode host environment strings (e.g. `COM5`) into device displays.
+
 
 ---
 
@@ -98,6 +107,8 @@ Refer to the following guides for concrete implementations and protocol details:
   See [ArmClang CMSIS-DSP Guide](./references/armclang_cmsis_dsp_compatibility.md) for resolving `L6242E` attribute clashes, `L6907E` linker selection script locks, `L6218E` MicroLIB symbol missing, and GCC builtins substitution (`__builtin_arm_smuad`).
 * **Dual-Workflow Architecture (MDK-ARM + Modern CMake)**:
   See [Dual-Workflow Guide](./references/dual_workflow_mdk_cmake_guide.md) for configuring dual-engine projects sharing the same `Firmware/` core, CubeMX regeneration safe protocols, and cross-compiler portability rules (ArmClang 6 vs GCC).
+* **CubeMX `.ioc` Sync & Scaffolding Pruning Standard**:
+  See [CubeMX IOC Sync & Scaffolding Rules](./references/cubemx_ioc_sync_and_scaffolding_rules.md) for overwrite immunity SOP, clock triangulation rules (BOM + IOC + Register), immediate scaffolding physical deconstruction, and driver decoupling under 400 lines.
 
 ---
 
@@ -118,3 +129,6 @@ Before presenting embedded code to the user, verify:
 - [ ] Peripheral clock is enabled before peripheral registers are accessed.
 - [ ] Status return value `HAL_StatusTypeDef` is checked on critical initializations.
 - [ ] For ArmClang 6 projects linking CMSIS-DSP precompiled libraries, `-fshort-enums -fshort-wchar` is configured in `MiscControls` to avert ABI clashes; in headless CLI, `startup_stm32xxxx.s` includes `--pd "__MICROLIB SETA 1"` and links via ARM Linker V5.06 if L6907E occurs.
+- [ ] CubeMX `.ioc` is strictly synchronized with code: pin pull-ups, open-drain, and clock trees match so that code re-generation is non-destructive.
+- [ ] Hardware clock source is triangulated against BOM silk screen, `.ioc` HSE_VALUE, and runtime PLL registers.
+- [ ] All temporary hardware bring-up scaffolding (carousels, test patterns, unneeded driver branches) has been physically pruned upon hardware specification confirmation.
