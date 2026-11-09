@@ -1,14 +1,14 @@
 ---
 name: embedded-engineering-master
-version: 2.3.0
+version: 2.4.0
 description: >-
   Flagship full-stack embedded hardware & software engineering orchestrator for STM32, ARM Cortex-M, and ESP32/RISC-V microcontrollers.
   Unifies the complete end-to-end hardware-software pipeline: EasyEDA circuit/pinout verification -> UCA/PIA multi-tier firmware architecture -> Headless compilation (Keil/CMake/idf.py) -> pyOCD/esptool hardware flashing -> industrial serial telemetry (UART/VOFA+) -> milestone checkpointing.
-  Featuring Autonomous Architecture Tiering (Compact Mode vs UCA Comprehensive Mode), Blackboard state bus, Policy chain engine, Matrix Break-Before-Make safety, and 3-in-1 Unified Protocol.
+  Featuring Autonomous Architecture Tiering (Compact Mode vs UCA Comprehensive Mode), Blackboard state bus, Policy chain engine, Matrix Break-Before-Make safety, 3-in-1 Unified Protocol, and strict Zero Desktop Intrusion (未获明确允许严禁向宿主桌面落盘快捷方式/文件).
   Trigger when the user asks for end-to-end embedded development, hardware-software co-debugging, full-chain feature delivery, board bring-up, or full lifecycle diagnostics (e.g., "全链路开发", "端到端调通", "从原理图到板子跑通", "板子死机全系统排查", "软硬件全栈闭环").
 license: Apache-2.0
 metadata:
-  version: v2.3.0
+  version: v2.4.0
   role: Master Orchestrator
 ---
 
@@ -129,7 +129,8 @@ flowchart TD
 
 ### 阶段 6：工程自洁收尾、健康审计与快照归档 (Hygiene, Audit & Snapshot DoD)
 任何功能开发、问题排查或架构调整交付前，必须执行三步交付自检（Definition of Done）：
-1. **工作区卫生自洁 (Workspace Hygiene)**：
+1. **工作区卫生自洁与桌面零入侵红线 (Workspace Hygiene & Zero Desktop Intrusion)**：
+   * **🚫 桌面零入侵红线 (Strict Explicit Consent Required)**：严禁在未获得用户明确允许/指令的情况下，将任何上位机快捷方式（`.lnk` / `.desktop`）、启动脚本、可执行文件或临时产物直接生成或写入用户的操作系统桌面（`Desktop` / `~/桌面`）。所有软件启动入口（如 `run_app.bat`、`run_app.ps1`、`run_app.sh`）必须严格收敛在项目或工程工作区内部（如 `Host/`、`Tools/`），确保用户桌面环境纯净；仅当用户主动要求或确认授权后，方可在桌面创建快捷方式；
    * 清理零散日志：立即清除根目录与构建目录下的 `.log`、临时 `.txt`、`.tmp`、调试备份等中间脏污；
    * 权威资料去重归位：所有硬件/软件规格书统一归入 `docs/`，严禁在根目录并存重复副本；根目录提供统一入口 `README.md`；
    * 工具链权责严密分立：MCU 固件构建与字库脚本统一归入 `Tools/Firmware/`，严禁污染 `Host/` 上位机目录。

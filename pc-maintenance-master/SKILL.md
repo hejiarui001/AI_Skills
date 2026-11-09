@@ -1,16 +1,16 @@
 ---
 name: pc-maintenance-master
-version: 2.0.0
+version: 2.1.0
 description: >-
   Comprehensive Windows PC maintenance, system diagnostics, memory optimization,
-  startup app auditing, hardware monitoring, and disk cleanup toolkit for this computer.
+  startup app auditing, hardware monitoring, disk cleanup toolkit, and strict Zero Desktop Intrusion for this computer.
   Integrates Sysinternals (RAMMap, Autoruns, Process Explorer, TCPView), WizTree, CrystalDiskInfo,
   HWiNFO64, QuickLook, UniGetUI, FreeFileSync, voidtools Everything, BleachBit, and native PowerShell diagnostics.
   Use when user asks to analyze memory, clean up computer, tune system performance, audit startup apps,
   check disk health, monitor hardware temperature/power, update apps, or manage background services.
 license: Apache-2.0
 metadata:
-  version: v2.0.0
+  version: v2.1.0
   author: Antigravity
 ---
 
@@ -36,6 +36,8 @@ metadata:
    * 回收站清空前必须扫描拦截并交由用户人工确认。
 5. **🛡️ 白名单防滥用**：
    * Defender 白名单仅允许添加明确的受信任开发目录（如 `D:\Tools`、工程库），严禁对 `C:\`、`C:\Windows` 或 `System32` 等高危系统目录做全免扫描。
+6. **🚫 桌面零入侵红线 (Zero Desktop Intrusion Protocol)**：
+   * 严禁在未获得用户明确允许或主动指令的情况下，向用户操作系统桌面（`$env:USERPROFILE\Desktop` 或 `$(xdg-user-dir DESKTOP)`）生成任何快捷方式（`.lnk` / `.desktop`）、临时测试脚本或软件文件。所有诊断工具、配置及输出产物必须严格收敛在指定目录（如 `D:\Tools` 或工作区内），保持用户桌面纯净。
 
 ---
 
