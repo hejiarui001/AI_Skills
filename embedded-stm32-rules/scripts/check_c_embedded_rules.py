@@ -33,7 +33,7 @@ def check_file(filepath):
     if filename in {'syscalls.c', 'sysmem.c'} or (filename.startswith('system_stm32') and filename.endswith('.c')):
         return issues
 
-    with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+    with open(filepath, 'r', encoding='utf-8-sig', errors='ignore') as f:
         lines = f.readlines()
 
     total_lines = len(lines)
