@@ -16,7 +16,7 @@ metadata:
 
 # PC Maintenance Master (个人电脑维护与全栈工具箱管家)
 
-本 Skill 是专为当前主机（华为 MateBook / i5-13420H / 16GB / Windows 11 + Linux 双系统）定制的系统级日常维护、深度诊断、优化与全量工具箱集成管理技能库。它融合了底层 CIM/WMI 探针与当前全盘纳管的 39 款顶级效率与运维工具阵列。
+本 Skill 是专为当前主机（华为 MateBook / i5-13420H / 16GB / Windows 11 + Linux 双系统）定制的系统级日常维护、深度诊断、优化与全量工具箱集成管理技能库。它融合了底层 CIM/WMI 探针与当前全盘纳管的 40 款顶级效率与运维工具阵列。
 
 ---
 
@@ -50,7 +50,7 @@ metadata:
 | **01_Sysinternals** | `Autoruns`, `ProcessExplorer`, `RAMMap`, `TCPView` | 微软官方系统级底层进程、网络连接、内存与自启深度审计排查 |
 | **02_Hardware_Benchmark** | `HWiNFO64`, `CrystalDiskInfo`, `CrystalDiskMark`, `WizTree` | 硬件传感器功耗温度监测、SSD寿命S.M.A.R.T.、读写测速与MFT大文件透视 |
 | **03_System_Utilities** | `QuickLook`, `Everything`, `UniGetUI`, `HiBit Uninstaller`, `TrafficMonitor`, `Carnac`, `Winstep Nexus`, `7-Zip`, `AOMEI Partition Assistant`, `傲梅恢复之星`, `FreeFileSync`, `BleachBit`, `Ventoy`, `DesktopOK`, `IHasher` | 空格键秒级文件预览、全盘极速搜索、软件批量更新、拟态Dock栏、屏幕按键显示、U盘启动、深度卸载与数据恢复 |
-| **04_Network_Transfer** | `Clash Verge`, `ToDesk`, `CloudDrive2`, `Rayburst`, `SpeedManager` | 核心网络代理规则分流、低延迟远程桌面、网盘本地虚拟盘挂载、Aria2 多线程下载与宽带精准测速 |
+| **04_Network_Transfer** | `Clash Verge`, `ToDesk`, `Sunshine`, `CloudDrive2`, `Rayburst`, `SpeedManager` | 核心网络代理规则分流、低延迟远程桌面与串流、网盘本地虚拟盘挂载、Aria2 多线程下载与宽带精准测速 |
 | **05_Productivity_Office** | `Zotero`, `zotero-pdf2zh`, `Notion`, `TencentDocs`, `YoudaoDict` | 学术文献与数据手册管理、PDF文献双语翻译、结构化个人知识库、多端在线协作与屏幕取词翻译 |
 | **06_Peripherals_Drivers** | `ATK HUB`, `AULA F3020`, `VivoSuite`, `MouseClick` | 外设8K/磁轴驱动控制、键盘按键宏、vivo手机多屏互传与鼠标连点器 |
 | **07_Media_Tools** | `EVCapture`, `FormatFactory` | 高清无水印桌面屏幕录制、全能音视频转码压缩与媒体处理 |
@@ -68,16 +68,19 @@ powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\p
 
 ### 操作二：安全磁盘与临时垃圾清理（保护登录态）
 ```powershell
-powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\pc-maintenance-master\scripts\clean_temp_junk.ps1"
+powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\pc-maintenance-master\scripts\clean_temp_junk.ps1" [-DeepPreview] [-DeepClean] [-Json]
 ```
+*(默认清理 `$env:TEMP` / `CrashDumps` / `INetCache`；`-DeepPreview` 只预览 `bleachbit_console.exe` 安全白名单空间占用而不删除)*
 
 ### 操作三：系统安全态势与基线巡检
 ```powershell
-powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\pc-maintenance-master\scripts\security_audit.ps1"
+powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\pc-maintenance-master\scripts\security_audit.ps1" [-Deep] [-Top 10] [-Json]
 ```
+*(`-Deep` 联动 `autorunsc64.exe` 与 `tcpvcon64.exe`，脚本侧过滤并仅返回 Top-N 非微软活跃自启与外联进程摘要)*
 
-### 操作四：统一快速启动全量纳管工具
+### 操作四：统一快速启动与工具清单查询
 ```powershell
 powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\pc-maintenance-master\scripts\launch_sysinternals.ps1" -Tool <工具名> [-RunAsAdmin]
+powershell -ExecutionPolicy Bypass -File "C:\Users\hejia\.gemini\config\skills\pc-maintenance-master\scripts\launch_sysinternals.ps1" -List [-Json]
 ```
 *(支持模糊匹配与自动回退查找，如 `-Tool Carnac`、`-Tool WizTree`、`-Tool Everything`、`-Tool FormatFactory`)*

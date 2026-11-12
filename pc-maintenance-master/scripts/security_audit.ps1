@@ -3,7 +3,9 @@
     pc-maintenance-master: Comprehensive System Security Posture Audit
 #>
 param(
-    [switch]$Json
+    [switch]$Json,
+    [switch]$Deep,
+    [int]$Top = 10
 )
 
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
@@ -80,6 +82,44 @@ $secReport = [PSCustomObject]@{
     }
 }
 
+if ($Deep) {
+    $autorunsc = "D:\Tools\01_Sysinternals\Autoruns\autorunsc64.exe"
+    $tcpvcon   = "D:\Tools\01_Sysinternals\TCPView\tcpvcon64.exe"
+
+    $autostartEntries = @()
+    if (Test-Path -LiteralPath $autorunsc) {
+        $rawAr = & $autorunsc -accepteula -nobanner -a lt -c -s -m 2>$null
+        $autostartEntries = @(
+            $rawAr | ConvertFrom-Csv |
+                Where-Object { $_.Enabled -eq 'enabled' -and $_.'Image Path' } |
+                Select-Object -First $Top @{N='Category';E={$_.Category}},
+                    @{N='Entry';E={$_.Entry}},
+                    @{N='Verified';E={($_.Signer -notmatch 'Not verified')}},
+                    @{N='ImagePath';E={$_.'Image Path'}}
+        )
+    }
+
+    $externalConns = @()
+    if (Test-Path -LiteralPath $tcpvcon) {
+        $rawTcp = & $tcpvcon -accepteula -nobanner -a -c -n 2>$null
+        $tcpRows = $rawTcp | ConvertFrom-Csv -Header @('Protocol','Process','PID','State','Local','Remote')
+        $externalConns = @(
+            $tcpRows |
+                Where-Object { $_.State -eq 'ESTABLISHED' -and $_.Remote -and $_.Remote -notmatch '^(127\.|0\.0\.0\.0|::1)' } |
+                Group-Object Process |
+                Sort-Object Count -Descending |
+                Select-Object -First $Top @{N='Process';E={$_.Name}},
+                    @{N='Connections';E={$_.Count}},
+                    @{N='SampleRemotes';E={($_.Group.Remote | Select-Object -Unique -First 3) -join ', '}}
+        )
+    }
+
+    $secReport | Add-Member -NotePropertyName DeepAudit -NotePropertyValue ([PSCustomObject]@{
+        NonMsActiveAutostarts = $autostartEntries
+        TopExternalProcesses  = $externalConns
+    })
+}
+
 if ($Json) {
     $secReport | ConvertTo-Json -Depth 4
 } else {
@@ -121,6 +161,14 @@ if ($Json) {
         Write-Host " [OK] 自启项安全审计: 正常 (未检测到隐藏在 Temp/Public 的可疑启动项)" -ForegroundColor Green
     } else {
         Write-Host " [WARN] 警告: 发现可疑临时目录自启动项: $($suspiciousStartups -join ', ')" -ForegroundColor Red
+    }
+
+    if ($Deep -and $secReport.DeepAudit) {
+        Write-Host ""
+        Write-Host " [DEEP] 非微软活跃自启项 (Top $Top):" -ForegroundColor Yellow
+        $secReport.DeepAudit.NonMsActiveAutostarts | Format-Table -AutoSize | Out-String | Write-Host
+        Write-Host " [DEEP] 活跃外联进程聚合 (Top $Top):" -ForegroundColor Yellow
+        $secReport.DeepAudit.TopExternalProcesses | Format-Table -AutoSize | Out-String | Write-Host
     }
 
     Write-Host "==========================================================" -ForegroundColor Cyan

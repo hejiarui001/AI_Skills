@@ -1,7 +1,7 @@
 # 本地全量工具箱架构与纳管速查索引 (D:\Tools Master Inventory)
 
 > **执行环境**：Windows 11 x86_64 | 基线工作区：`D:\Tools`  
-> **更新时间**：2026-11-07 | 纳管工具总数：39 款（7 大核心分类 + 1 待收纳区）
+> **更新时间**：2026-11-12 | 纳管工具总数：40 款（39 个顶层条目 + 1 个嵌套子工具，7 大核心分类 + 1 待收纳区）
 
 ---
 
@@ -65,6 +65,7 @@ D:\Tools/
 | :--- | :--- | :--- | :--- |
 | **Clash Verge** | `04_Network_Transfer\Clash Verge\clash-verge.exe` | 网络规则分流、代理内核与 TUN 网卡模式 | 内核守护 |
 | **ToDesk** | `04_Network_Transfer\ToDesk\ToDesk.exe` | 低延迟跨平台远程桌面控制与文件互传 | 常驻服务 (`ToDesk_Service`) |
+| **Sunshine** | `04_Network_Transfer\Sunshine\sunshine.exe` | 低延迟开源远程桌面与游戏串流宿主端 | 常驻服务 (`SunshineService`) |
 | **CloudDrive2** | `04_Network_Transfer\CloudDrive2\clouddrive.exe` | 将百度/阿里/115等网盘直接挂载为本地磁盘 | 驱动集成 |
 | **Rayburst** | `04_Network_Transfer\Rayburst\rayburst.exe` | 基于 Aria2 Next 的全能多线程下载工具 | 托盘开机常驻 |
 | **SpeedManager** | `04_Network_Transfer\SpeedManager\测速网.exe` | 测速网国内节点宽带上/下行与延迟精准测试 | 桌面客户端 |
@@ -73,7 +74,7 @@ D:\Tools/
 | 工具名称 | 对应目录与核心程序 | 功能与使用场景 | 运行形态 |
 | :--- | :--- | :--- | :--- |
 | **Zotero** | `05_Productivity_Office\Zotero\zotero.exe` | 学术文献与芯片 Datasheet 管理（数据存 C 盘） | 桌面客户端 |
-| **zotero-pdf2zh** | `05_Productivity_Office\zotero-pdf2zh\start_server.bat` | Zotero PDF 英文文献双语对照翻译本地推理服务 (Port:8890) | 后端脚本/服务 |
+| **zotero-pdf2zh** | `05_Productivity_Office\Zotero\zotero-pdf2zh\一键启动翻译服务.bat` | Zotero PDF 英文文献双语对照翻译本地推理服务 (Port:8890，静默入口 `start_server_silent.vbs` / `server\run_server.bat`) | 后端脚本/服务 |
 | **Notion** | `05_Productivity_Office\Notion\Notion.exe` | 结构化个人知识库、项目看板与协同笔记 | Electron 客户端 |
 | **TencentDocs** | `05_Productivity_Office\TencentDocs\TencentDocsLauncher.exe` | 腾讯在线多端协作文档与收集表 | 常驻服务更新项 |
 | **YoudaoDict** | `05_Productivity_Office\YoudaoDict\YoudaoDict.exe` | 屏幕取词、OCR 划词翻译与专业词典 | 桌面客户端 |
@@ -108,4 +109,22 @@ launch_sysinternals.ps1 -Tool HWiNFO          # 启动硬件传感器监测
 launch_sysinternals.ps1 -Tool WizTree         # 启动磁盘大文件透视仪
 launch_sysinternals.ps1 -Tool Everything      # 启动全盘秒搜
 launch_sysinternals.ps1 -Tool FormatFactory   # 启动格式工厂
+launch_sysinternals.ps1 -List -Json           # 导出全量映射与路径存活状态
 ```
+
+---
+
+## 4. 无头 CLI 与自动化能力矩阵（按需扩展清单）
+
+为控制上下文 Token，所有 CLI 适配均在脚本侧聚合为紧凑 JSON（Top-N），不直接吐出原始全量日志：
+
+| 所属工具 | 无头可执行文件 / 接口 | 当前接入状态 | 后续演进方向 |
+| :--- | :--- | :--- | :--- |
+| **Autoruns** | `autorunsc64.exe -accepteula -nobanner -a lt -c -s -m` | **已接入** `security_audit.ps1 -Deep` | 按需扩展服务/驱动项 (`-a lts`) |
+| **TCPView** | `tcpvcon64.exe -accepteula -nobanner -a -c -n` | **已接入** `security_audit.ps1 -Deep` | 聚合外部连接异常进程 |
+| **BleachBit** | `bleachbit_console.exe -p/-c system.tmp system.logs system.prefetch` | **已接入** `clean_temp_junk.ps1 -DeepPreview/-DeepClean` | 严格白名单，禁用浏览器会话清理 |
+| **Everything** | `http://127.0.0.1:18080/?json=1` | **已独立封装** (`everything-search`) | 跨技能定位大文件/工程/单据 |
+| **zotero-pdf2zh** | `http://127.0.0.1:8890/health` + `start_server_silent.vbs` | 待按需接入 (`zotero-assistant`) | 自动健康检查与静默拉起 |
+| **UniGetUI** | `uniget.exe status / manager / operation` | 待按需接入 | 批量检查软件更新并同步本清单 |
+| **WizTree / CrystalDiskInfo** | `WizTree64.exe` / `DiskInfo64.exe` | 待按需接入 `system_diagnose.ps1` | C 盘告警时导出 Top-15 大文件与 S.M.A.R.T. 摘要 |
+| **FormatFactory (Python/FFmpeg)** | `FFModules\Python\markitdown.exe` / `ffmpeg.exe` | 待按需接入 | 文档转 Markdown 降维读取、媒体无头转码 |

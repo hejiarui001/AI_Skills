@@ -1,12 +1,13 @@
-<#
+﻿<#
 .SYNOPSIS
     pc-maintenance-master: Unified Launcher for Full PC Toolkit (D:\Tools)
 #>
 param(
-    [Parameter(Mandatory=$true)]
     [string]$Tool,
     
-    [switch]$RunAsAdmin
+    [switch]$RunAsAdmin,
+    [switch]$List,
+    [switch]$Json
 )
 
 $toolsRoot = "D:\Tools"
@@ -47,11 +48,12 @@ $toolsMap = [ordered]@{
     'CloudDrive2'         = "$toolsRoot\04_Network_Transfer\CloudDrive2\clouddrive.exe"
     'Rayburst'            = "$toolsRoot\04_Network_Transfer\Rayburst\rayburst.exe"
     'SpeedManager'        = "$toolsRoot\04_Network_Transfer\SpeedManager\测速网.exe"
+    'Sunshine'            = "$toolsRoot\04_Network_Transfer\Sunshine\sunshine.exe"
     'ToDesk'              = "$toolsRoot\04_Network_Transfer\ToDesk\ToDesk.exe"
 
     # 05_Productivity_Office
     'Zotero'              = "$toolsRoot\05_Productivity_Office\Zotero\zotero.exe"
-    'ZoteroPdf2Zh'        = "$toolsRoot\05_Productivity_Office\zotero-pdf2zh\start_server.bat"
+    'ZoteroPdf2Zh'        = "$toolsRoot\05_Productivity_Office\Zotero\zotero-pdf2zh\一键启动翻译服务.bat"
     'Notion'              = "$toolsRoot\05_Productivity_Office\Notion\Notion.exe"
     'TencentDocs'         = "$toolsRoot\05_Productivity_Office\TencentDocs\TencentDocsLauncher.exe"
     'YoudaoDict'          = "$toolsRoot\05_Productivity_Office\YoudaoDict\YoudaoDict.exe"
@@ -67,8 +69,31 @@ $toolsMap = [ordered]@{
     'FormatFactory'       = "$toolsRoot\07_Media_Tools\FormatFactory\FormatFactory.exe"
 }
 
-# Fuzzy / alias key match
-$matchedKey = $toolsMap.Keys | Where-Object { $_ -like "*$Tool*" -or $Tool -like "*$_*" } | Select-Object -First 1
+if ($List -or -not $Tool) {
+    if ($Json) {
+        $items = $toolsMap.Keys | ForEach-Object {
+            [PSCustomObject]@{
+                Tool   = $_
+                Path   = $toolsMap[$_]
+                Exists = (Test-Path -LiteralPath $toolsMap[$_])
+            }
+        }
+        $items | ConvertTo-Json -Depth 3
+    } else {
+        Write-Host "可用工具列表 ($($toolsMap.Count)):" -ForegroundColor Yellow
+        $toolsMap.Keys | ForEach-Object { Write-Host " - $_" }
+    }
+    exit 0
+}
+
+# Exact match first, then substring match, then reverse match (longest key first)
+$matchedKey = $toolsMap.Keys | Where-Object { $_ -eq $Tool } | Select-Object -First 1
+if (-not $matchedKey) {
+    $matchedKey = $toolsMap.Keys | Where-Object { $_ -like "*$Tool*" } | Select-Object -First 1
+}
+if (-not $matchedKey) {
+    $matchedKey = $toolsMap.Keys | Where-Object { $Tool -like "*$_*" } | Sort-Object Length -Descending | Select-Object -First 1
+}
 
 if (-not $matchedKey) {
     # Try direct name lookup
