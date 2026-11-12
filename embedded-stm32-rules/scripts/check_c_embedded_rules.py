@@ -61,11 +61,9 @@ def check_file(filepath):
         if not code_line:
             continue
 
-        # Check 2: Reverse dependency (BSP/Module including App)
+        # Check 2: Reverse dependency (BSP/Module including App; CubeMX main.h in bsp_* is allowed)
         if any(prefix in filename for prefix in ['bsp_', 'module_', 'drv_']):
-            if re.search(r'#include\s+["<](app_[^">]+|main\.h)[">]', code_line) and 'bsp_' in filename and 'main.h' in code_line:
-                pass  # bsp including main.h is standard in CubeMX
-            elif re.search(r'#include\s+["<]app_[^">]+[">]', code_line):
+            if re.search(r'#include\s+["<]app_[^">]+[">]', code_line):
                 issues.append(f"Line {idx}: [ARCH CRITICAL] Reverse dependency detected. Low-level driver/module must never include application header '{code_line}'.")
 
         # Check 3: malloc / free
