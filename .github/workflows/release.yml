@@ -1,0 +1,158 @@
+name: AI Skills Release Archive
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Target tag to publish (defaults to latest v* tag)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+jobs:
+  publish-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository with full history and tags
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Package archives and publish GitHub Releases
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_TAG: ${{ github.event.inputs.tag }}
+          REF_NAME: ${{ github.ref_name }}
+          REF_PATH: ${{ github.ref }}
+        run: |
+          set -euo pipefail
+          TAG="${INPUT_TAG}"
+          if [ -z "$TAG" ] && [[ "$REF_PATH" == refs/tags/* ]]; then
+            TAG="$REF_NAME"
+          fi
+          if [ -z "$TAG" ]; then
+            TAG=$(git describe --tags --abbrev=0 --match 'v*' 2>/dev/null || git tag -l 'v*' --sort=-creatordate | head -n 1)
+          fi
+          if [ -z "$TAG" ]; then
+            echo "No v* tag found."
+            exit 1
+          fi
+          export TARGET_TAG="$TAG"
+
+          python3 - <<'PY'
+          import os, re, subprocess
+          from pathlib import Path
+
+          target = os.environ["TARGET_TAG"]
+          changelog_path = Path("CHANGELOG.md")
+          changelog_text = changelog_path.read_text(encoding="utf-8") if changelog_path.exists() else ""
+
+          def extract_notes(tag: str) -> str:
+              pattern = rf"(?ms)^## \[{re.escape(tag)}\][^\n]*\n(.*?)(?=^## \[|\Z)"
+              m = re.search(pattern, changelog_text)
+              if m:
+                  return m.group(1).strip()
+              prev = subprocess.run(
+                  ["git", "describe", "--tags", "--abbrev=0", f"{tag}^"],
+                  capture_output=True, text=True
+              ).stdout.strip()
+              rev_range = f"{prev}..{tag}" if prev else tag
+              commits = subprocess.run(
+                  ["git", "log", "--no-merges", "--format=%h %s", rev_range],
+                  capture_output=True, text=True
+              ).stdout.strip().splitlines()
+              feats = [c for c in commits if " feat" in f" {c.split(' ', 1)[-1]}"]
+              fixes = [c for c in commits if " fix" in f" {c.split(' ', 1)[-1]}"]
+              others = [c for c in commits if c not in feats and c not in fixes]
+
+              def block(title: str, items: list[str]) -> str:
+                  if not items:
+                      return ""
+                  lines = "\n".join(f"* {i}" for i in items)
+                  return f"<details open>\n<summary>{title}</summary>\n\n{lines}\n\n</details>\n"
+
+              sections = [
+                  block("✨ 新增特性 (New Features)", feats),
+                  block("🐛 修复问题 (Bug Fixes)", fixes),
+                  block("🚀 优化与维护 (Maintenance)", others),
+              ]
+              body = "\n".join(s for s in sections if s).strip()
+              if prev:
+                  body += f"\n\n**Compare**: `{prev}...{tag}`"
+              return body or f"Release snapshot for `{tag}`."
+
+          existing_tags = subprocess.run(
+              ["git", "tag", "-l", "v*"], capture_output=True, text=True
+          ).stdout.strip().splitlines()
+          milestones = ["v1.0.0", "v1.1.0", "v2.0.0", "v2.1.0-pre-slim"]
+          ordered_tags = [t for t in milestones if t in existing_tags and t != target]
+          ordered_tags.append(target)
+
+          Path("dist").mkdir(exist_ok=True)
+          Path("notes").mkdir(exist_ok=True)
+
+          titles = {
+              "v1.0.0": "AI Skills v1.0.0 (初始 45 技能基线)",
+              "v1.1.0": "AI Skills v1.1.0 (三段式版本号基线)",
+              "v2.0.0": "AI Skills v2.0.0 (45 合 21 高内聚套件重构)",
+              "v2.1.0-pre-slim": "AI Skills v2.1.0-pre-slim (精简前完整原版快照)",
+              "v2.2.0": "AI Skills v2.2.0 (嵌入式技能无损精炼 + 版本归档)",
+          }
+
+          emb_dirs = [
+              "easyeda-api",
+              "embedded-engineering-master",
+              "embedded-stm32-rules",
+              "cortex-m-pyocd",
+              "industrial-serial-agent",
+          ]
+
+          for t in ordered_tags:
+              note_file = Path("notes") / f"{t}.md"
+              note_file.write_text(extract_notes(t) + "\n", encoding="utf-8")
+
+              full_zip = Path("dist") / f"AI_Skills-{t}.zip"
+              subprocess.run([
+                  "git", "archive", "--format=zip",
+                  f"--prefix=AI_Skills-{t}/",
+                  f"--output={full_zip}",
+                  t, "--", ".", ":!.github"
+              ], check=True)
+
+              assets = [str(full_zip)]
+              present = subprocess.run(
+                  ["git", "ls-tree", "--name-only", t, "--"] + emb_dirs,
+                  capture_output=True, text=True
+              ).stdout.strip().splitlines()
+              if present:
+                  emb_zip = Path("dist") / f"embedded-skills-{t}.zip"
+                  subprocess.run([
+                      "git", "archive", "--format=zip",
+                      f"--prefix=embedded-skills-{t}/",
+                      f"--output={emb_zip}",
+                      t, "--"
+                  ] + present, check=True)
+                  assets.append(str(emb_zip))
+
+              if t == target and "v2.1.0-pre-slim" in existing_tags and t != "v2.1.0-pre-slim":
+                  pre_zip = Path("dist") / "embedded-skills-v2.1.0-pre-slim.zip"
+                  if pre_zip.exists() and str(pre_zip) not in assets:
+                      assets.append(str(pre_zip))
+
+              title = titles.get(t, f"AI Skills {t}")
+              is_latest = (t == target and "-pre-" not in t)
+              view = subprocess.run(["gh", "release", "view", t], capture_output=True, text=True)
+              if view.returncode != 0:
+                  cmd = ["gh", "release", "create", t, *assets, "--title", title, "--notes-file", str(note_file)]
+                  if not is_latest:
+                      cmd.append("--latest=false")
+                  subprocess.run(cmd, check=True)
+              elif t == target:
+                  subprocess.run(["gh", "release", "edit", t, "--title", title, "--notes-file", str(note_file)], check=True)
+                  subprocess.run(["gh", "release", "upload", t, *assets, "--clobber"], check=True)
+          PY

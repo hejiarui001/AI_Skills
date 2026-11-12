@@ -36,7 +36,7 @@
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
 | **`invoice-audit-master`** | `1.9.0` | 高校/竞赛发票全生命周期智能审计、对账凑单与 11 列报销总账生成 | [SKILL.md](./invoice-audit-master/SKILL.md) |
-| **`pc-maintenance-master`** | `2.0.0` | Sysinternals 内存优化、启动项体检、服务治理、硬件监控与磁盘深度清理 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
+| **`pc-maintenance-master`** | `2.1.0` | Sysinternals 内存优化、启动项体检、服务治理、硬件监控、Sunshine 与 headless CLI/JSON 模式 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
 | **`everything-search`** | `1.0.0` | voidtools Everything 本地全盘毫秒级极速检索与文件调阅 | [SKILL.md](./everything-search/SKILL.md) |
 | **`zotero-assistant`** | `1.0.0` | Zotero 本地文献库只读检索、芯片 Datasheet 与学术元数据调阅 | [SKILL.md](./zotero-assistant/SKILL.md) |
 | **`git-worklog-reporter`** | `1.0.0` | 本地 Git 提交提取与高管级研发日报/周报结构化撰写 | [SKILL.md](./git-worklog-reporter/SKILL.md) |
@@ -98,3 +98,27 @@ git push origin main
 1. **更新前强制远端检视**：运行 `python Tools/sync_skills.py check`；
 2. **远端增量先拉取后分析**：运行 `python Tools/sync_skills.py pull`；
 3. **融合校验后再行提交上传**：运行 `python Tools/sync_skills.py push -m "feat: ..."`。
+
+---
+
+## 五、 版本管理、原版保留与 GitHub Releases 归档
+
+为保证日常加载 `SKILL.md` 的极简 Token 消耗，同时完整保留历史原版正文以供随时回溯参考，仓库采用 **Git 里程碑标签 + `CHANGELOG.md` + GitHub Actions 自动 Release** 三位一体架构：
+
+1. **版本变更与原版删减对照台账**：详见 [CHANGELOG.md](./CHANGELOG.md)（按 `优化精简` / `新增特性` / `修复问题` / `原版对照` 折叠呈现）。
+2. **关键里程碑 Git Tags**：
+   * `v1.0.0` -> 初始 45 技能基线
+   * `v1.1.0` -> 全局三段式语义化版本基线
+   * `v2.0.0` -> 45 合 21 高内聚技能套件整合
+   * `v2.1.0-pre-slim` -> **精简前完整原版快照**（保留 `easyeda-api v1.1.64` 747 行等完整历史原文）
+   * `v2.2.0` -> 嵌入式技能无损精炼 + 版本归档基线
+3. **本地一键回看历史原版（零上下文消耗）**：
+   ```bash
+   # 查看精简前任意技能的原版全文
+   git show v2.1.0-pre-slim:embedded-engineering-master/SKILL.md
+   git show v2.1.0-pre-slim:easyeda-api/SKILL.md
+
+   # 对比两版之间的详细差异
+   git diff v2.1.0-pre-slim..v2.2.0 -- embedded-stm32-rules/SKILL.md
+   ```
+4. **GitHub Releases 自动发布**：[`.github/workflows/release.yml`](./.github/workflows/release.yml) 监听 `v*` 标签推送，自动抽取 `CHANGELOG.md` 说明并打包当前与历史快照 `.zip` 发布至 [GitHub Releases](https://github.com/hejiarui001/AI_Skills/releases)。
