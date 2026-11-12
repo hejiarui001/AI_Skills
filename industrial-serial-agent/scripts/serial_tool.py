@@ -10,6 +10,9 @@ import time
 import json
 import argparse
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 try:
     import serial
     import serial.tools.list_ports
@@ -17,19 +20,32 @@ except ImportError:
     print(json.dumps({"error": "pyserial not installed. Run 'pip install pyserial'"}))
     sys.exit(1)
 
-def list_ports():
+
+def _is_bluetooth_port(p):
+    hwid = (p.hwid or "").upper()
+    desc = (p.description or "")
+    return "BTHENUM" in hwid or "BLUETOOTH" in hwid or "Bluetooth" in desc or "蓝牙" in desc
+
+
+def list_ports(exclude_bt=False):
     ports = serial.tools.list_ports.comports()
     results = []
+    skipped_bt = 0
     for p in ports:
+        is_bt = _is_bluetooth_port(p)
+        if exclude_bt and is_bt:
+            skipped_bt += 1
+            continue
         results.append({
             "device": p.device,
             "description": p.description,
             "hwid": p.hwid,
             "vid": f"0x{p.vid:04X}" if p.vid else None,
             "pid": f"0x{p.pid:04X}" if p.pid else None,
-            "manufacturer": p.manufacturer
+            "manufacturer": p.manufacturer,
+            "is_bluetooth": is_bt,
         })
-    return {"total_ports": len(results), "ports": results}
+    return {"total_ports": len(results), "skipped_bluetooth": skipped_bt, "ports": results}
 
 def send_and_receive(port, baudrate=115200, data="PING\r\n", timeout=2.0, is_hex=False):
     try:
@@ -117,7 +133,8 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     # list
-    subparsers.add_parser("list", help="List available COM ports")
+    list_parser = subparsers.add_parser("list", help="List available COM/tty ports")
+    list_parser.add_argument("--exclude-bt", action="store_true", help="Filter out Bluetooth virtual COM ports (BTHENUM)")
 
     # send
     send_parser = subparsers.add_parser("send", help="Send data to serial port and read response")
@@ -136,7 +153,7 @@ def main():
     args = parser.parse_args()
 
     if args.command == "list":
-        res = list_ports()
+        res = list_ports(exclude_bt=args.exclude_bt)
     elif args.command == "send":
         res = send_and_receive(args.port, args.baud, args.data, args.timeout, args.hex)
     elif args.command == "capture":

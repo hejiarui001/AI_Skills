@@ -56,24 +56,24 @@ void I2C_Bus_Recover(void)
     HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8 | GPIO_PIN_9, GPIO_PIN_SET);
-    for (volatile int i = 0; i < 200; i++);
+    for (volatile uint32_t i = 0; i < 200U; i++);
 
     /* 3. 产生 9 个时钟方波脉冲 (驱动从机释放 SDA) */
-    for (uint8_t i = 0; i < 9; i++)
+    for (uint8_t i = 0; i < 9U; i++)
     {
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_RESET);
-        for (volatile int d = 0; d < 50; d++);
+        for (volatile uint32_t d = 0; d < 50U; d++);
         HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
-        for (volatile int d = 0; d < 50; d++);
+        for (volatile uint32_t d = 0; d < 50U; d++);
     }
 
     /* 4. 产生标准 I2C STOP 条件 */
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_RESET);
-    for (volatile int d = 0; d < 50; d++);
+    for (volatile uint32_t d = 0; d < 50U; d++);
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
-    for (volatile int d = 0; d < 50; d++);
+    for (volatile uint32_t d = 0; d < 50U; d++);
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, GPIO_PIN_SET);
-    for (volatile int d = 0; d < 50; d++);
+    for (volatile uint32_t d = 0; d < 50U; d++);
 
     /* ========================================================
      * 【致命陷阱 1 防范】：必须显式将引脚重新配置为复用开漏模式 (AF4)
@@ -90,7 +90,7 @@ void I2C_Bus_Recover(void)
     HAL_I2C_DeInit(&hi2c1);
     __HAL_RCC_I2C1_CLK_ENABLE();
     __HAL_RCC_I2C1_FORCE_RESET();
-    for (volatile int i = 0; i < 100; i++);
+    for (volatile uint32_t i = 0; i < 100U; i++);
     __HAL_RCC_I2C1_RELEASE_RESET();
 
     /* 5. 重新执行硬件外设初始化 */
@@ -114,8 +114,8 @@ void I2C_Bus_Recover(void)
 
 > [!WARNING]
 > **设计检查要点**：
-> 1. **严禁将 CV 引脚上拉至 STM32 的 3.3V 外部电源**：必须直接上拉至 MP2672 自身的 Pin 4（`VCC`，内部 3.6V LDO 输出），避免反向倒灌与上电时序竞争。
-> 2. **内部 LDO 启动条件**：Pin 4（`VCC`）在 `VIN`（USB 5V）或 `BATT`（锂电池）任一有电时自动建立。若两者皆无，芯片不工作，I2C 总线自然无响应。
+> 1. **严禁将 CV 引脚上拉至 STM32 的 3.3V 外部电源**：必须直接上拉至 MP2672 自身的 Pin 4（`VCC`，内部 LDO 输出），避免反向倒灌与上电时序竞争。
+> 2. **供电与内部 `VCC` LDO 启动排查**：实机仅接 ST-Link（只供 MCU 3.3V）而无 `VIN`（USB 5V）或 `BATT`（2S 电池）时，MP2672 内部逻辑不工作，I2C 全地址扫描必返回 NACK；若怀疑供电/模式引脚异常，先行用万用表实测 Pin 4（`VCC`）及 `VIN` 电压再排查 I2C 时序。
 
 ### 2.2 MP2672 寄存器速查表 (Host-Control 模式)
 

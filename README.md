@@ -26,11 +26,11 @@
 ### 1. 嵌入式与硬件全栈工程 (Embedded & Hardware Suite - 5 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
-| **`embedded-engineering-master`** | `2.3.0` | 端到端软硬件一体化开发、UCA/PIA 分层总线与全链路闭环协调总控中枢 | [SKILL.md](./embedded-engineering-master/SKILL.md) |
-| **`embedded-stm32-rules`** | `1.10.0` | STM32 工业编码军规、PIA 四层架构、时间片调度器与 VOFA+ 联调规范 | [SKILL.md](./embedded-stm32-rules/SKILL.md) |
-| **`easyeda-api`** | `1.1.64` | 嘉立创 EDA Pro (EasyEDA) 原理图/PCB/封装自动化与 WebSocket Bridge | [SKILL.md](./easyeda-api/SKILL.md) |
-| **`cortex-m-pyocd`** | `1.1.0` | ARM Cortex-M 探针调试、pyOCD 固件烧录、整片擦除 (自适应 Win/Linux) | [SKILL.md](./cortex-m-pyocd/SKILL.md) |
-| **`industrial-serial-agent`** | `1.1.0` | 工业级串口通信、帧协议解析与 VOFA+ 遥测监控通道 (自适应 COM/ttyUSB) | [SKILL.md](./industrial-serial-agent/SKILL.md) |
+| **`embedded-engineering-master`** | `2.5.0` | 端到端软硬件一体化开发、UCA/PIA 分层总线、PMIC/ST7789 硬件防坑与全链路总控 | [SKILL.md](./embedded-engineering-master/SKILL.md) |
+| **`embedded-stm32-rules`** | `1.11.0` | STM32 工业编码军规、PIA 四层架构、ST7789/PyQt5 加固与 VOFA+ 联调规范 | [SKILL.md](./embedded-stm32-rules/SKILL.md) |
+| **`easyeda-api`** | `1.2.0` | 嘉立创 EDA Pro (EasyEDA) 原理图/PCB/封装自动化与跨平台 Bridge (渐进式披露瘦身) | [SKILL.md](./easyeda-api/SKILL.md) |
+| **`cortex-m-pyocd`** | `1.2.0` | ARM Cortex-M 探针调试、pyOCD 固件烧录、Under-Reset 解锁与全片擦除 (Win/Linux) | [SKILL.md](./cortex-m-pyocd/SKILL.md) |
+| **`industrial-serial-agent`** | `1.2.0` | 工业级串口通信、BTHENUM 蓝牙过滤、帧收发与 VOFA+ 日志抓取 (COM/ttyUSB) | [SKILL.md](./industrial-serial-agent/SKILL.md) |
 
 ### 2. 系统管理与学术办公 (System, Academic & Utility Suite - 5 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |

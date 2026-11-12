@@ -103,14 +103,18 @@ Drivers/CMSIS/Include/cmsis_armclang.h: error: use of unknown builtin '__builtin
 在调用 `armasm.exe` 汇编 `startup_stm32xxxx.s` 时，必须提供完整的目标架构与 MicroLIB 绑定宏：
 
 ```powershell
+# 动态定位 Keil 安装根目录（优先读环境变量 $env:KEIL_ROOT）
+$KEIL_ROOT = if ($env:KEIL_ROOT) { $env:KEIL_ROOT } else { "C:\Keil_v5" } # 或实际本地路径如 E:\Keil ARM\MDK_ARM
+$CMSIS_INC = Join-Path $KEIL_ROOT "ARM\CMSIS\Include"
+
 # 针对 Cortex-M7 单精度 FPU (如 STM32H750/H743 单精度模式)
 armasm.exe --cpu=Cortex-M7.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1" `
-  -I "E:\Keil ARM\MDK_ARM\ARM\CMSIS\Include" `
+  -I "$CMSIS_INC" `
   --depend "startup.d" -o "startup.o" "startup_stm32h750xx.s"
 
 # 针对 Cortex-M4 单精度 FPU (如 STM32F407/F429/G474)
 armasm.exe --cpu=Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1" `
-  -I "E:\Keil ARM\MDK_ARM\ARM\CMSIS\Include" `
+  -I "$CMSIS_INC" `
   --depend "startup.d" -o "startup.o" "startup_stm32f407xx.s"
 ```
 

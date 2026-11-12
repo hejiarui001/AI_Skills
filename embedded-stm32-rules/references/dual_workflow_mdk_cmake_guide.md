@@ -53,11 +53,12 @@ Project_Root/
 在 `MDK-ARM/` 目录下放置专用 PowerShell 构建脚本，直接调用 ArmClang 6 编译器进行高速无头构建并生成 `.hex`：
 
 ```powershell
-# 工具链路径常量（对齐本地环境）
-$ARMCLANG = "E:\Keil ARM\MDK_ARM\ARM\ARMCLANG\Bin\armclang.exe"
-$ARMASM   = "E:\Keil ARM\MDK_ARM\ARM\ARMCLANG\Bin\armasm.exe"
-$ARMLINK  = "E:\Keil ARM\MDK_ARM\ARM\ARMCC\bin\armlink.exe"  # 使用 Linker V5.06 规避 L6907E
-$FROMELF  = "E:\Keil ARM\MDK_ARM\ARM\ARMCLANG\Bin\fromelf.exe"
+# 动态解析 Keil 工具链根目录（优先读 $env:KEIL_ROOT 或自动探测常见盘符）
+$KEIL_ROOT = if ($env:KEIL_ROOT) { $env:KEIL_ROOT } else { @("C:\Keil_v5", "E:\Keil_v5", "E:\Keil ARM\MDK_ARM") | Where-Object { Test-Path $_ } | Select-Object -First 1 }
+$ARMCLANG = Join-Path $KEIL_ROOT "ARM\ARMCLANG\Bin\armclang.exe"
+$ARMASM   = Join-Path $KEIL_ROOT "ARM\ARMCLANG\Bin\armasm.exe"
+$ARMLINK  = Join-Path $KEIL_ROOT "ARM\ARMCC\bin\armlink.exe"  # 使用 Linker V5.06 规避 L6907E
+$FROMELF  = Join-Path $KEIL_ROOT "ARM\ARMCLANG\Bin\fromelf.exe"
 
 # 编译参数
 $CFLAGS = @("-xc", "-std=c99", "--target=arm-arm-none-eabi", "-mcpu=cortex-m7", "-mfpu=fpv5-sp-d16", "-mfloat-abi=hard", "-c", "-fno-rtti", "-funsigned-char", "-fshort-enums", "-fshort-wchar", "-D__MICROLIB", "-DSTM32H750xx", "-DUSE_HAL_DRIVER", "-O2")
@@ -74,12 +75,24 @@ $CFLAGS = @("-xc", "-std=c99", "--target=arm-arm-none-eabi", "-mcpu=cortex-m7", 
 set(CMAKE_SYSTEM_NAME Generic)
 set(CMAKE_SYSTEM_PROCESSOR arm)
 
-# 自动绑定本地 STM32CubeCLT 工具链或环境变量路径
+# 跨平台动态定位 arm-none-eabi-gcc（环境变量 -> Windows STM32CubeCLT -> Linux PATH/opt）
 if(NOT TOOLCHAIN_PREFIX)
-    if(EXISTS "E:/Tools/STM32CubeCLT_1.22.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc.exe")
-        set(TOOLCHAIN_PREFIX "E:/Tools/STM32CubeCLT_1.22.0/GNU-tools-for-STM32/bin/arm-none-eabi-")
+    if(DEFINED ENV{STM32CLT_PATH} AND EXISTS "$ENV{STM32CLT_PATH}/GNU-tools-for-STM32/bin")
+        set(TOOLCHAIN_PREFIX "$ENV{STM32CLT_PATH}/GNU-tools-for-STM32/bin/arm-none-eabi-")
     else()
-        set(TOOLCHAIN_PREFIX "arm-none-eabi-")
+        find_program(_ARM_GCC NAMES arm-none-eabi-gcc
+            PATHS
+                "$ENV{ProgramFiles}/STMicroelectronics/STM32Cube/STM32CubeCLT/GNU-tools-for-STM32/bin"
+                "E:/Tools/STM32CubeCLT_1.22.0/GNU-tools-for-STM32/bin"
+                "/opt/st/stm32cubeclt/GNU-tools-for-STM32/bin"
+                "/usr/bin"
+        )
+        if(_ARM_GCC)
+            get_filename_component(_GCC_BIN "${_ARM_GCC}" DIRECTORY)
+            set(TOOLCHAIN_PREFIX "${_GCC_BIN}/arm-none-eabi-")
+        else()
+            set(TOOLCHAIN_PREFIX "arm-none-eabi-")
+        endif()
     endif()
 endif()
 
