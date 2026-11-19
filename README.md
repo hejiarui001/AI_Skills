@@ -5,7 +5,7 @@
 > **多端部署路径**：
 > - **Windows 11**：`C:\Users\hejia\.gemini\config\skills\`
 > - **Linux (Ubuntu)**：`~/.gemini/config/skills/`
-> **架构设计准则**：23 大高内聚全场景专业技能，涵盖嵌入式硬件全栈、系统运维、学术办公、云协同、大数据管道与治理元能力。
+> **架构设计准则**：24 大高内聚全场景专业技能，涵盖嵌入式硬件全栈、系统运维、学术办公、云协同、大数据管道与治理元能力。
 
 ---
 
@@ -34,7 +34,7 @@
 
 ---
 
-## 二、 五大领域 23 大精炼技能矩阵清单
+## 二、 五大领域 24 大精炼技能矩阵清单
 
 ### 1. 嵌入式与硬件全栈工程 (Embedded & Hardware Suite - 5 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
@@ -45,7 +45,7 @@
 | **`cortex-m-pyocd`** | `1.2.0` | ARM Cortex-M 探针调试、pyOCD 固件烧录、Under-Reset 解锁与全片擦除 (Win/Linux) | [SKILL.md](./cortex-m-pyocd/SKILL.md) |
 | **`industrial-serial-agent`** | `1.2.0` | 工业级串口通信、BTHENUM 蓝牙过滤、帧收发与 VOFA+ 日志抓取 (COM/ttyUSB) | [SKILL.md](./industrial-serial-agent/SKILL.md) |
 
-### 2. 系统管理与学术办公 (System, Academic & Utility Suite - 5 项)
+### 2. 系统管理与学术办公 (System, Academic & Utility Suite - 6 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
 | **`invoice-audit-master`** | `1.10.0` | 高校/竞赛发票全生命周期智能审计、对账凑单与 11 列报销总账生成 | [SKILL.md](./invoice-audit-master/SKILL.md) |
@@ -53,10 +53,13 @@
 | **`everything-search`** | `1.0.0` | voidtools Everything 本地全盘毫秒级极速检索与文件调阅 | [SKILL.md](./everything-search/SKILL.md) |
 | **`zotero-assistant`** | `1.0.0` | Zotero 本地文献库只读检索、芯片 Datasheet 与学术元数据调阅 | [SKILL.md](./zotero-assistant/SKILL.md) |
 | **`git-worklog-reporter`** | `1.0.0` | 本地 Git 提交提取与高管级研发日报/周报结构化撰写 | [SKILL.md](./git-worklog-reporter/SKILL.md) |
+| **`divergent-search-guide`** | `1.0.0` | 启发式发散搜索、多维信息调研、社区实操穿透与时效交叉校验 | [SKILL.md](./divergent-search-guide/SKILL.md) |
 
-### 3. 云端协同与容灾网关 (Cloud Sync & Safety Gateway - 1 项)
+### 3. 路由系统、P2P专网穿透与容灾网关 (Routing, P2P Streaming & Safety Gateway - 3 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
+| **`routeros-network-master`** | `1.1.0` | MikroTik RouterOS 堡垒运维、192.168.8.x 命脉五层自检、SD健康治理与双轨容灾备份 | [SKILL.md](./routeros-network-master/SKILL.md) |
+| **`p2p-streaming-master`** | `1.0.0` | EasyTier 国内高速 Mesh 专网、Moonlight 4K 低延迟串流、NAT穿透与 230 发阶梯压测 | [SKILL.md](./p2p-streaming-master/SKILL.md) |
 | **`google-sync-guard`** | `1.0.0` | 实时网络探针、断网熔断、离线写前日志（WAL）与唤醒重放网关 | [SKILL.md](./google-sync-guard/SKILL.md) |
 
 ### 4. 云原生大数据工程 (GCP Cloud & BigData Master Suite - 5 大提纯套件)
@@ -72,7 +75,7 @@
 | 技能标识 | 当前版本 | 整合吸收的原技能 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- | :--- |
 | **`notebook-data-science`** | `2.0.0` | `ml-best-practices`<br>`notebook-guidance` | **数据科学与交互式笔记本规范**：机器学习建模评估范式 (ML Best Practices) 与 Jupyter Notebook 交互式数据分析规约 | [SKILL.md](./notebook-data-science/SKILL.md) |
-| **`skills-navigator`** | `1.6.0` | - | 技能总控台、快捷命令索引、23 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
+| **`skills-navigator`** | `1.7.0` | - | 技能总控台、快捷命令索引、24 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
 | **`accidental-data-loss-prevention`**| `1.0.0` | - | 高危破坏性操作防御机制（DROP / RM / DELETE 强制拦截确认） | [SKILL.md](./accidental-data-loss-prevention/SKILL.md) |
 | **`managing-python-dependencies`** | `1.0.0` | - | Python 环境依赖治理与虚拟环境防全局污染守则 | [SKILL.md](./managing-python-dependencies/SKILL.md) |
 | **`skill-repair`** | `1.0.0` | - | Agent 技能安装依赖异常诊断与 manifest 自动修复引擎 | [SKILL.md](./skill-repair/SKILL.md) |

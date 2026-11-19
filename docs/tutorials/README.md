@@ -11,7 +11,7 @@
 | 序号 | 领域教程文档 | 覆盖核心业务与技术栈 | 核心联动技能群 |
 | :---: | :--- | :--- | :--- |
 | **01** | [**嵌入式软硬件全栈实战教程**](./01_embedded_hardware_tutorial.md) | STM32 / ESP32 电路设计、PIA 分层架构、无头固件构建、pyOCD 烧录与 VOFA+ 遥测 | `easyeda-api`<br>`embedded-stm32-rules`<br>`cortex-m-pyocd`<br>`industrial-serial-agent`<br>`embedded-engineering-master` |
-| **02** | [**系统运维、科研学术与财务报销教程**](./02_system_academic_finance_tutorial.md) | Windows 40 款兵器运维、Everything 毫秒搜盘、Zotero 文献手册库、高校发票报销 11 列总账与 Git 研发汇报 | `pc-maintenance-master`<br>`everything-search`<br>`zotero-assistant`<br>`invoice-audit-master`<br>`git-worklog-reporter` |
+| **02** | [**系统运维、科研学术与财务报销教程**](./02_system_academic_finance_tutorial.md) | Windows 40 款兵器运维、Everything 毫秒搜盘、Zotero 文献手册库、高校发票报销 11 列总账、Git 汇报与多维发散调研 | `pc-maintenance-master`<br>`everything-search`<br>`zotero-assistant`<br>`invoice-audit-master`<br>`git-worklog-reporter`<br>`divergent-search-guide` |
 | **03** | [**路由系统、P2P专网穿透与低延迟串流教程**](./03_network_and_p2p_streaming_tutorial.md) | MikroTik RouterOS 堡垒路由、192.168.8.x 命脉五层自检、EasyTier 国内高速 Mesh 专网、Moonlight 4K 串流与压测 | `routeros-network-master`<br>`p2p-streaming-master`<br>`google-sync-guard` |
 | **04** | [**云原生大数据、数据流与治理教程**](./04_gcp_bigdata_engineering_tutorial.md) | Google Cloud ADC 认证合规、BigQuery 高性能数仓/BQML、GCS 存储分层与 FUSE、Airflow 2/3 调度总成、dbt/Dataform | `bigquery-master`<br>`gcs-storage-suite`<br>`gcp-airflow-composer-suite`<br>`gcp-data-engineering`<br>`gcp-governance-assets` |
 | **05** | [**Agent 运行治理、元能力与安全守则教程**](./05_agent_governance_and_meta_tutorial.md) | 全量技能健康巡检与上游同步、高危破坏拦截防线、Python 环境隔离、数据科学 Notebook 军规与 SemVer 演进 | `skills-navigator`<br>`notebook-data-science`<br>`accidental-data-loss-prevention`<br>`managing-python-dependencies`<br>`skill-repair` |

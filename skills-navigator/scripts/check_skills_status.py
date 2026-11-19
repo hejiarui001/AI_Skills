@@ -20,7 +20,8 @@ DOMAINS = {
     ],
     "02_System_Academic": [
         "everything-search", "pc-maintenance-master",
-        "zotero-assistant", "invoice-audit-master", "git-worklog-reporter"
+        "zotero-assistant", "invoice-audit-master", "git-worklog-reporter",
+        "divergent-search-guide"
     ],
     "03_Cloud_Sync_Gateway": [
         "google-sync-guard", "routeros-network-master", "p2p-streaming-master"

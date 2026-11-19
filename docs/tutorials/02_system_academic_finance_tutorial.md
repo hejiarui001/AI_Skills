@@ -1,7 +1,7 @@
 # 系统运维、科研学术与财务报销实战教程 (System, Academic & Finance Tutorial)
 
-> **领域定位**：Windows 主机深度维护、全盘极速检索、学术文献/芯片手册调阅、高校竞赛发票合规审计与 Git 研发汇报  
-> **联动技能群**：`pc-maintenance-master`、`everything-search`、`zotero-assistant`、`invoice-audit-master`、`git-worklog-reporter`  
+> **领域定位**：Windows 主机深度维护、全盘极速检索、学术文献/芯片手册调阅、高校竞赛发票合规审计、Git 研发汇报与多维发散调研  
+> **联动技能群**：`pc-maintenance-master`、`everything-search`、`zotero-assistant`、`invoice-audit-master`、`git-worklog-reporter`、`divergent-search-guide`  
 > **更新机制**：随日常资产盘点、报销批次提报与研报产出持续循环演进
 
 ---
@@ -13,12 +13,12 @@
 │ 1. 电脑体检运维 │ ──> │ 2. 文档文献调阅 │ ──> │ 3. 发票报销审计 │
 │ pc-maintenance  │     │everything/zotero│     │  invoice-audit  │
 └─────────────────┘     └─────────────────┘     └─────────────────┘
-                                                         │
-                                                         ▼
-                                                ┌─────────────────┐
-                                                │ 4. Git 研发周报 │
-                                                │  git-worklog    │
-                                                └─────────────────┘
+         │                                               │
+         ▼                                               ▼
+┌─────────────────┐                             ┌─────────────────┐
+│ 5. 多维发散搜索 │                             │ 4. Git 研发周报 │
+│divergent-search │                             │  git-worklog    │
+└─────────────────┘                             └─────────────────┘
 ```
 
 ---
@@ -57,6 +57,12 @@
 * **核心目标**：从底层 Git 提交与代码 Diff 中提炼出条理清晰的高管级工程日报/周报。
 * **【联动技能】**：[`git-worklog-reporter`](../../git-worklog-reporter/SKILL.md)
   - *触发示例*：“根据我今天的 git 提交写一份今日研发日报”、“整理我过去 7 天的代码修改生成一份结构化周报”。
+
+### 5. 启发式发散搜索与多维信息调研
+* **核心目标**：针对未知网络服务、国外域名/VPS 申请流程、开源生态对比，通过发散思维与社区一线穿透获取真实信息，规避单一搜索盲区与大量 Token 额度消耗。
+* **4 步发散循环**：意图解构（平台/支付/合规/替代） ➔ 社区穿透（V2EX / NodeSeek / Reddit） ➔ 多分支发散 ➔ 2026时效校验。
+* **【联动技能】**：[`divergent-search-guide`](../../divergent-search-guide/SKILL.md)
+  - *触发示例*：“帮我查一下怎么申请一个国外域名，包括主流平台对比、支付方式与避坑建议”、“调研一下目前海外免实名 VPS 选购方案与社区评价”。
 
 ---
 

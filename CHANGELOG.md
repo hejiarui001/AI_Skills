@@ -6,6 +6,30 @@
 
 ---
 
+## [v2.4.0] - 2026-11-20 (发散搜索与多维信息调研导航技能 + 教程联动)
+
+**Tag**: `v2.4.0` | **新增技能**: `divergent-search-guide` (`v1.0.0`) | **总技能数**: 24 项
+
+<details open>
+<summary>🌟 新增技能与架构演进 (New Skill & Architecture Evolution)</summary>
+
+* **上线启发式发散搜索与多维信息调研导航 (`divergent-search-guide` v1.0.0)**：
+  - **核心定位**：专治单一检索盲区、信息孤岛、官方营销包装与盲目多轮抓取导致的 Token 额度浪费；
+  - **启发式发散导引**：非强制性拦截，作为发散思维模型辅助搜索意图解构；
+  - **极低额度负荷**：正文 `SKILL.md` 仅 40 行，严格控制 Token 消耗；
+  - **核心 4 步循环**：意图解构（平台/支付/合规/替代） ➔ 社区穿透（`site:v2ex.com` / `site:nodeseek.com` / `site:linux.do` / `site:reddit.com`） ➔ 多分支发散 ➔ 2026 时效核验；
+  - **实战手册下沉 (`references/search_playbook.md`)**：
+    - 精准搜索语法大表（双引号强匹配、`site:` 限定、减号排除营销号、`filetype:pdf`、intitle）；
+    - 海外域名申请全景决策树（Porkbun / Cloudflare / Namecheap / Spaceship 对比、支付摩擦、WHOIS 隐私、DNS 托管防失联）；
+    - 海外免实名 VPS 选购决策链与开源技术栈生态调研模板。
+* **领域教程双向联动**：
+  - 更新 [02_系统运维、科研学术与财务报销教程](./docs/tutorials/02_system_academic_finance_tutorial.md)，新增第 5 阶段“启发式发散搜索与多维信息调研”及实战 Prompt；
+  - `skills-navigator` 升级至 `v1.7.0`，全量 Prompt 矩阵收录发散搜索触发用例，健康自检脚本接入该技能。
+
+</details>
+
+---
+
 ## [v2.3.0] - 2026-11-20 (全域技能二次无损提炼与 Token 瘦身)
 
 **Tag**: `v2.3.0` | **基线演进**: 全库行数从 `1,616 行` 压缩至 `1,184 行`（**-26.7%**），预估 Token 从 `22,051` 压缩至 `16,550`（**节省 5,501 Tokens / -25.0%**）。
