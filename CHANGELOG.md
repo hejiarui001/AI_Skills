@@ -6,6 +6,47 @@
 
 ---
 
+## [v2.3.0] - 2026-11-20 (全域技能二次无损提炼与 Token 瘦身)
+
+**Tag**: `v2.3.0` | **基线演进**: 全库行数从 `1,616 行` 压缩至 `1,184 行`（**-26.7%**），预估 Token 从 `22,051` 压缩至 `16,550`（**节省 5,501 Tokens / -25.0%**）。
+
+<details open>
+<summary>🚀 优化与精简 (Optimization & Token Slimming)</summary>
+
+对系统运维、财务报销、网络路由与技能总控四大高负荷技能执行渐进式披露（Progressive Disclosure）重构，正文 `SKILL.md` 总体积大幅脱水：
+
+| 技能标识 | 版本跃迁 | 精简前指标 | 精简后指标 | 削减比例 | 详尽知识与 SOP 去向 |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **`invoice-audit-master`** | `1.9.0` -> `1.10.0` | `297 L / 11,939 B` (3,730 T) | `77 L / 3,041 B` (950 T) | **-74.1%** | 赛季层级、双月提醒、双文件夹打印架构与11列Excel格式下沉至 `references/lifecycle_and_extraction_guide.md` |
+| **`routeros-network-master`** | `1.0.0` -> `1.1.0` | `138 L / 5,555 B` (1,735 T) | `49 L / 2,175 B` (679 T) | **-64.5%** | SOP-01~06 终端排障与双轨自动备份脚本代码下沉至 `references/routeros_ops_sop.md` |
+| **`skills-navigator`** | `1.5.0` -> `1.6.0` | `133 L / 5,068 B` (1,583 T) | `48 L / 2,114 B` (660 T) | **-63.9%** | 全量 21 技能自然语言 Prompt 实战矩阵穷举下沉至 `references/prompt_matrix.md` |
+| **`pc-maintenance-master`** | `2.1.0` -> `2.2.0` | `86 L / 4,416 B` (1,380 T) | `48 L / 2,042 B` (638 T) | **-44.2%** | 40 款纳管兵器库详细分类大表收敛，统一指针链接至已有的 `references/tools_inventory.md` |
+
+</details>
+
+<details open>
+<summary>✨ 架构保真与收益核验</summary>
+
+* **无损知识留存**：所有被精简的业务细节（发票双文件夹打印规约、光栅化防伪禁令、RouterOS 脚本源码、Prompt 矩阵）均在对应 `references/` 案例手册中 100% 保真沉淀，调用时按需毫秒级调阅；
+* **入口极速唤起**：全库除独立规约外，其余所有技能入口 `SKILL.md` 均压密在 80 行以内（平均 45~65 行），彻底终结“调一个技能即耗空额度”的痛点。
+
+</details>
+
+<details open>
+<summary>🌟 核心架构升级 (New Architecture & Domain Tutorials)</summary>
+
+* **上线全域精炼实战教程体系 (`docs/tutorials/`)**：
+  - 确立“**原子技能保持极简执行单项武器，领域教程写透实战心法与全景联动**”的双向共生规范；
+  - 交付 5 大领域教程总汇：[01_嵌入式全栈](./docs/tutorials/01_embedded_hardware_tutorial.md)、[02_系统科研财务](./docs/tutorials/02_system_academic_finance_tutorial.md)、[03_路由穿透串流](./docs/tutorials/03_network_and_p2p_streaming_tutorial.md)、[04_GCP大数据](./docs/tutorials/04_gcp_bigdata_engineering_tutorial.md)、[05_治理元能力](./docs/tutorials/05_agent_governance_and_meta_tutorial.md)；
+  - 建立“项目实战踩坑 -> 教程吸收沉淀 -> 技能升级进化”的持续飞轮演进闭环。
+* **新增网络串流旗舰技能 (`p2p-streaming-master` v1.0.0)**：
+  - 覆盖 EasyTier 国内 Mesh 专网 (`10.144.144.0/24`)、Moonlight/Sunshine 4K 串流调优、230 发阶梯压测 A+ 门禁与 Tailscale 按需冷备；
+  - 正文仅 54 行，核心指南下沉至 `references/p2p_streaming_guide.md`，配套快速探针 `check_p2p_health.py`。
+
+</details>
+
+---
+
 ## [v2.2.0] - 2026-11-12 (嵌入式技能无损精炼 + 版本归档基线)
 
 **Tag**: `v2.2.0` | **Compare**: [`v2.1.0-pre-slim...v2.2.0`](https://github.com/hejiarui001/AI_Skills/compare/v2.1.0-pre-slim...v2.2.0)

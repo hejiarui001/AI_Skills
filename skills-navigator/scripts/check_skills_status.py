@@ -23,7 +23,7 @@ DOMAINS = {
         "zotero-assistant", "invoice-audit-master", "git-worklog-reporter"
     ],
     "03_Cloud_Sync_Gateway": [
-        "google-sync-guard", "routeros-network-master"
+        "google-sync-guard", "routeros-network-master", "p2p-streaming-master"
     ],
     "04_GCP_Data_Cloud": [
         "bigquery-master", "gcs-storage-suite", "gcp-airflow-composer-suite",

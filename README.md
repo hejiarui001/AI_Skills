@@ -5,7 +5,20 @@
 > **多端部署路径**：
 > - **Windows 11**：`C:\Users\hejia\.gemini\config\skills\`
 > - **Linux (Ubuntu)**：`~/.gemini/config/skills/`
-> **架构设计准则**：21 大高内聚全场景旗舰技能，涵盖嵌入式硬件全栈、系统运维、学术办公、云协同、大数据管道与治理元能力。
+> **架构设计准则**：23 大高内聚全场景专业技能，涵盖嵌入式硬件全栈、系统运维、学术办公、云协同、大数据管道与治理元能力。
+
+---
+
+## 零、 领域实战精炼教程体系 (Domain Master Tutorials & Skill Linkage)
+
+本技能库实施 **“原子技能保持精炼锋利（< 80 行极低 Token 消耗执行单一任务），领域教程写透全景与联动（高密度沉淀领域流水线与实操心法）”** 的双向共生联动架构：
+
+* 📖 **教程索引总览**：查阅 [docs/tutorials/README.md](./docs/tutorials/README.md)
+  1. 🛠️ **嵌入式与硬件全栈**：[01_embedded_hardware_tutorial.md](./docs/tutorials/01_embedded_hardware_tutorial.md)
+  2. 💻 **系统运维、科研学术与财务报销**：[02_system_academic_finance_tutorial.md](./docs/tutorials/02_system_academic_finance_tutorial.md)
+  3. 🌐 **路由系统、P2P专网穿透与低延迟串流**：[03_network_and_p2p_streaming_tutorial.md](./docs/tutorials/03_network_and_p2p_streaming_tutorial.md)
+  4. 📊 **云原生大数据、数据流与治理**：[04_gcp_bigdata_engineering_tutorial.md](./docs/tutorials/04_gcp_bigdata_engineering_tutorial.md)
+  5. 🧭 **Agent 运行治理、元能力与安全守则**：[05_agent_governance_and_meta_tutorial.md](./docs/tutorials/05_agent_governance_and_meta_tutorial.md)
 
 ---
 
@@ -21,7 +34,7 @@
 
 ---
 
-## 二、 五大领域 21 大精炼技能矩阵清单
+## 二、 五大领域 23 大精炼技能矩阵清单
 
 ### 1. 嵌入式与硬件全栈工程 (Embedded & Hardware Suite - 5 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
@@ -35,8 +48,8 @@
 ### 2. 系统管理与学术办公 (System, Academic & Utility Suite - 5 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
-| **`invoice-audit-master`** | `1.9.0` | 高校/竞赛发票全生命周期智能审计、对账凑单与 11 列报销总账生成 | [SKILL.md](./invoice-audit-master/SKILL.md) |
-| **`pc-maintenance-master`** | `2.1.0` | Sysinternals 内存优化、启动项体检、服务治理、硬件监控、Sunshine 与 headless CLI/JSON 模式 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
+| **`invoice-audit-master`** | `1.10.0` | 高校/竞赛发票全生命周期智能审计、对账凑单与 11 列报销总账生成 | [SKILL.md](./invoice-audit-master/SKILL.md) |
+| **`pc-maintenance-master`** | `2.2.0` | Sysinternals 内存优化、启动项体检、服务治理、硬件监控、Sunshine 与 headless CLI/JSON 模式 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
 | **`everything-search`** | `1.0.0` | voidtools Everything 本地全盘毫秒级极速检索与文件调阅 | [SKILL.md](./everything-search/SKILL.md) |
 | **`zotero-assistant`** | `1.0.0` | Zotero 本地文献库只读检索、芯片 Datasheet 与学术元数据调阅 | [SKILL.md](./zotero-assistant/SKILL.md) |
 | **`git-worklog-reporter`** | `1.0.0` | 本地 Git 提交提取与高管级研发日报/周报结构化撰写 | [SKILL.md](./git-worklog-reporter/SKILL.md) |
@@ -59,7 +72,7 @@
 | 技能标识 | 当前版本 | 整合吸收的原技能 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- | :--- |
 | **`notebook-data-science`** | `2.0.0` | `ml-best-practices`<br>`notebook-guidance` | **数据科学与交互式笔记本规范**：机器学习建模评估范式 (ML Best Practices) 与 Jupyter Notebook 交互式数据分析规约 | [SKILL.md](./notebook-data-science/SKILL.md) |
-| **`skills-navigator`** | `1.4.0` | - | 技能总控台、快捷命令索引、21 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
+| **`skills-navigator`** | `1.6.0` | - | 技能总控台、快捷命令索引、23 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
 | **`accidental-data-loss-prevention`**| `1.0.0` | - | 高危破坏性操作防御机制（DROP / RM / DELETE 强制拦截确认） | [SKILL.md](./accidental-data-loss-prevention/SKILL.md) |
 | **`managing-python-dependencies`** | `1.0.0` | - | Python 环境依赖治理与虚拟环境防全局污染守则 | [SKILL.md](./managing-python-dependencies/SKILL.md) |
 | **`skill-repair`** | `1.0.0` | - | Agent 技能安装依赖异常诊断与 manifest 自动修复引擎 | [SKILL.md](./skill-repair/SKILL.md) |
