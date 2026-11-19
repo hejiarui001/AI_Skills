@@ -1,6 +1,6 @@
 ---
 name: skills-navigator
-version: 1.4.0
+version: 1.5.0
 description: >-
   Skills command center, update monitor, and quick navigation guide. Trigger when the
   user says "指令", "命令", "技能", "技能清单", "有哪些技能", "怎么用", "快捷指令", "检查更新",
@@ -82,6 +82,11 @@ When the user triggers this skill:
    * 🛡️ **云协同与防断网熔断网关 (`google-sync-guard`)**:
      - *“探测当前 Google 云端网络连通性”*
      - *“检查离线暂存队列是否有未同步的日志”*
+   * 🌐 **路由系统运维与穿透网络大师 (`routeros-network-master`)**:
+     - *“巡检一下我的主路由运行状态与存储卡健康度”*
+     - *“排查 Tailscale 为什么还在走中继以及 Endpoints 丢失问题”*
+     - *“执行 192.168.8.x 远程命脉与网络五层全链路自检”*
+     - *“部署 RouterOS 双轨容灾自动备份脚本”*
 
    ### 04. 云原生大数据工程 (GCP Cloud & BigData Master Suite)
    * 📊 **BigQuery 统一中枢 (`bigquery-master`)**:
