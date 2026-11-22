@@ -6,6 +6,27 @@
 
 ---
 
+## [v2.6.0] - 2026-11-22 (技能结构化合并与治理域精炼脱水)
+
+**Tag**: `v2.6.0` | **合并吸纳**: `skill-repair` ➔ `skills-navigator` (`v1.9.0`) | **总技能数**: 24 项
+
+<details open>
+<summary>🌟 结构化合并与渐进式脱水 (Structural Merge & Progressive Slimming)</summary>
+
+* **`skill-repair` 完整吸纳至 `skills-navigator` (v1.9.0)**：
+  - **单一权威运维入口**：将分散的技能健康巡检、上游更新监控与损坏修复（`manifest.json` 手术式修复）深度整合为统一的技能生命周期管家；
+  - **SOP 资产下沉**：修复指南完整下沉至 [`skills-navigator/references/skill_repair_guide.md`](./skills-navigator/references/skill_repair_guide.md)；
+  - **CLI 命令升级**：`check_skills_status.py` 原生支持 `repair <skill_name>` 校验并重置损坏清单；
+  - **物理结构提炼**：删除冗余的 `skill-repair/` 目录，全库技能数优雅收敛至 24 项。
+* **`managing-python-dependencies` 渐进式脱水至 40 行 (v1.1.0)**：
+  - **瘦身幅度**：行数从 `103 行` 锐减至 `40 行`（**-61.2%**），消除全库唯一的超标技能；
+  - **多包管理器检测下沉**：将 uv、Poetry、Pipenv、Conda、venv 六大包管理器优先级矩阵与复合探测指令下沉至 [`managing-python-dependencies/references/package_managers.md`](./managing-python-dependencies/references/package_managers.md)；
+  - **全库 100% 达标**：当前全库 24 项技能行数全部严格收敛在 32~77 行之间，日常上下文加载 Token 负荷极低。
+
+</details>
+
+---
+
 ## [v2.5.0] - 2026-11-22 (会话断点与回退续接顾问技能 + 教程联动)
 
 **Tag**: `v2.5.0` | **新增技能**: `session-checkpoint-advisor` (`v1.0.0`) | **总技能数**: 25 项

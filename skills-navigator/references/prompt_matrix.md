@@ -97,11 +97,10 @@
   - *“分析当前电脑状态与未提交改动，给出最佳回退决策与防崩备份建议”*
 * 🔬 **数据科学与交互式笔记本规范 (`notebook-data-science`)**:
   - *“按照专业数据科学规范重构并审计这个 Jupyter Notebook”*
-* 🧭 **技能全景总控与更新 (`skills-navigator`)**:
-  - *“技能清单” / “检查技能更新”*
+* 🧭 **技能全景总控、更新与修复管家 (`skills-navigator`)**:
+  - *“技能清单” / “检查技能更新” / “更新 嘉立创EDA技能”*
+  - *“诊断并修复安装失败的技能清单” / “修复技能 manifest 报错”*
 * 🛡️ **误删与数据安全防线 (`accidental-data-loss-prevention`)**:
   - *“拦截 DROP / Broad DELETE / rm -rf 等高危操作”*
 * 🐍 **Python 环境依赖隔离防污染 (`managing-python-dependencies`)**:
   - *“审计当前项目的虚拟环境与依赖健康度”*
-* 🔧 **技能异常修复引擎 (`skill-repair`)**:
-  - *“诊断并修复安装失败的技能清单”*

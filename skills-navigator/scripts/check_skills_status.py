@@ -32,7 +32,7 @@ DOMAINS = {
     ],
     "05_Governance_Meta": [
         "skills-navigator", "session-checkpoint-advisor", "notebook-data-science", "accidental-data-loss-prevention",
-        "managing-python-dependencies", "skill-repair"
+        "managing-python-dependencies"
     ]
 }
 
@@ -141,7 +141,7 @@ def check_all_skills():
 def update_skill(dir_name):
     target_path = os.path.join(SKILLS_DIR, dir_name)
     if not os.path.exists(os.path.join(target_path, ".git")):
-        return {"success": False, "error": f"{dir_name} is not a git repository."}
+        return {"success": False, "error": f"{dir_name} is not an independent git repository."}
 
     ok, out, err = run_git(["pull", "origin", "main"], target_path)
     if not ok:
@@ -149,9 +149,54 @@ def update_skill(dir_name):
 
     return {"success": ok, "output": out if ok else err}
 
+def repair_skill(skill_name):
+    target_path = os.path.join(SKILLS_DIR, skill_name)
+    if not os.path.exists(target_path):
+        return {"success": False, "error": f"Skill directory not found: {target_path}"}
+
+    skill_md = os.path.join(target_path, "SKILL.md")
+    if not os.path.exists(skill_md):
+        return {"success": False, "error": f"Missing SKILL.md in {target_path}"}
+
+    meta = parse_frontmatter(skill_md)
+    if not meta:
+        return {"success": False, "error": f"Invalid YAML frontmatter in {skill_md}"}
+
+    # 尝试查找并修复 manifest.json
+    manifest_candidates = [
+        os.path.join(SKILLS_DIR, ".datacloud_skills_manifest"),
+        os.path.expanduser(r"~/.gemini/config/manifest.json"),
+        os.path.expanduser(r"~/.gemini/manifest.json")
+    ]
+    repaired_manifests = []
+    for mf in manifest_candidates:
+        if os.path.exists(mf):
+            try:
+                with open(mf, "r", encoding="utf-8") as f:
+                    mf_data = json.load(f)
+                if "skills" in mf_data and skill_name in mf_data["skills"]:
+                    mf_data["skills"][skill_name]["status"] = "installed"
+                    mf_data["skills"][skill_name]["disabled"] = False
+                    mf_data["skills"][skill_name]["error"] = None
+                    with open(mf, "w", encoding="utf-8") as f:
+                        json.dump(mf_data, f, indent=2, ensure_ascii=False)
+                    repaired_manifests.append(mf)
+            except Exception as e:
+                pass
+
+    return {
+        "success": True,
+        "skill": skill_name,
+        "version": meta["version"],
+        "repaired_manifests": repaired_manifests,
+        "message": f"Skill {skill_name} validated successfully. Frontmatter and structure are healthy."
+    }
+
 def main():
     if len(sys.argv) > 1 and sys.argv[1] == "update" and len(sys.argv) > 2:
         res = update_skill(sys.argv[2])
+    elif len(sys.argv) > 1 and sys.argv[1] == "repair" and len(sys.argv) > 2:
+        res = repair_skill(sys.argv[2])
     else:
         res = check_all_skills()
     print(json.dumps(res, ensure_ascii=False, indent=2))

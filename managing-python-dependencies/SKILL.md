@@ -1,103 +1,40 @@
 ---
 name: managing-python-dependencies
-version: 1.0.0
-description: |
-  Ensures proper Python dependency management, avoiding global `pip install` and
-  adhering to project-specific tooling.
-
-  Use this skill if any of the following are true:
-    1. Attempting to run `pip install {package_name}`.
-    2. Python packages or dependencies need to be added or modified.
-    3. Initiating a new Python project.
-    4. Creating a new notebook, even if just using BigQuery cells.
-    5. Generating Python code that includes `import` statements for third-party libraries.
-    6. Before executing Python scripts via the terminal to ensure the correct virtual environment is active.
+version: 1.1.0
+description: >-
+  Ensures proper Python dependency management, avoiding global pip install, enforcing
+  virtual environment isolation, and adhering to project-specific tooling (uv, poetry, pipenv, conda, venv).
+  Trigger on: "pip install", "python dependency", "requirements.txt", "virtualenv", "venv", "poetry", "uv add".
 license: Apache-2.0
 metadata:
-  version: v2
-  publisher: google
+  version: v1.1.0
+  author: Antigravity
 ---
 
-# Python Dependency Management Rule
+# Python Dependency & Environment Isolation Rule
 
-> [!CAUTION]
->
-> **BEFORE any `pip install`**: You MUST first detect the project's existing
-> dependency manager and use it correctly. Do NOT override the project's
-> established tooling.
+本技能强制规范 Python 运行环境与依赖治理，杜绝全局 `pip install` 污染宿主操作系统。
 
-> [!NOTE]
->
-> **Pre-Flight Environment Check Bundling**: You MUST NOT run multiple
-> sequential 1-line shell check commands (e.g. separate commands for python
-> version, pyspark version, auth check, pip list). Combine all pre-flight
-> environment and package availability probes into a single composite python
-> one-liner or shell check step.
->
-> Example composite probe:
->
-> ```bash
-> python3 -c "import sys, importlib.util; print(f'Python {sys.version.split()[0]}'); [(print(f'{pkg}: {__import__(pkg).__version__}') if importlib.util.find_spec(pkg) else print(f'{pkg}: not found')) for pkg in ['pyspark', 'google.cloud.bigquery']]"
-> ```
->
-> This bundling also applies to dependency manager detection; use a single `ls`
-> or `find` command to check for all potential dependency manager configuration
-> and lock files at once (e.g. `ls uv.lock poetry.lock Pipfile.lock
-> requirements.txt pyproject.toml`).
+---
 
-## Dependency Manager Detection
+## 1. 核心铁律与防御准则 (Non-Negotiable Rules)
 
-Before installing ANY Python package, check the workspace for these files **in
-priority order**:
+1. **严禁全局安装 (Global Install Prohibited)**：
+   * 绝对禁止在宿主全局环境中直接运行裸 `pip install <package>`；
+   * 必须在项目根目录探测或创建虚拟环境（`.venv`）。
+2. **工具链优先级探测 (Respect Project Tooling)**：
+   * 安装任何依赖前，必须探测既有配置文件，严禁用不同工具覆盖项目既有生态；
+   * 探测顺序：**uv (`uv.lock`) $\to$ Poetry (`[tool.poetry]`) $\to$ Pipenv (`Pipfile`) $\to$ Conda (`environment.yml`) $\to$ venv (`requirements.txt`)**；
+   * 统一使用复合探测命令：`ls uv.lock poetry.lock Pipfile.lock requirements.txt pyproject.toml 2>/dev/null`。
+3. **默认工作流规范 (Default venv + pip)**：
+   * 若无专属管理器，默认使用显式虚拟环境路径调用：
+     - **Linux**: `.venv/bin/pip install <pkg> && .venv/bin/pip freeze > requirements.txt`
+     - **Windows**: `.\.venv\Scripts\pip.exe install <pkg>; .\.venv\Scripts\pip.exe freeze > requirements.txt`
+4. **复合预检探针 (Composite Pre-Flight Probe)**：
+   * 禁止多条分散的探测命令，必须通过一条复合单行 Python 指令核验 Python 版本与关键库。
 
-1.  **Signal:** `uv.lock` or `pyproject.toml` with `[tool.uv]`
-    *   **Tool:** **uv**
-    *   **Install:** `uv add <package>`
-    *   **Setup:** `uv sync`
-2.  **Signal:** `pyproject.toml` with `[tool.poetry]`
-    *   **Tool:** **Poetry**
-    *   **Install:** `poetry add <package>`
-    *   **Setup:** `poetry install`
-3.  **Signal:** `Pipfile`
-    *   **Tool:** **Pipenv**
-    *   **Install:** `pipenv install <package>`
-    *   **Setup:** `pipenv install`
-4.  **Signal:** `environment.yml`
-    *   **Tool:** **Conda**
-    *   **Install:** `conda install <package>`
-    *   **Setup:** `conda env create -f environment.yml`
-5.  **Signal:** `requirements.txt` only
-    *   **Tool:** **venv + pip**
-    *   **Install:** `.venv/bin/pip install <package>`
-    *   **Setup:** `.venv/bin/pip install -r requirements.txt`
-6.  **Signal:** None of the above
-    *   **Tool:** **venv + pip** (default)
-    *   **Install:** `.venv/bin/pip install <package>`
-    *   **Setup:** `.venv/bin/pip install -r requirements.txt`
+---
 
-## Default: venv + pip
+## 2. 深度参考手册
 
-If no dependency manager is detected, use **venv + pip + requirements.txt** as
-the default:
-
-```bash
-# Initialize environment
-python3 -m venv .venv
-
-# Add dependencies
-.venv/bin/pip install <package>
-
-# Preserve state
-.venv/bin/pip freeze > requirements.txt
-```
-
-**Rules for venv + pip workflow:**
-
--   Always use `.venv/bin/pip` or `.venv/bin/python` (explicit path).
--   After installing, run: `.venv/bin/pip freeze > requirements.txt`.
--   When setting up: `.venv/bin/pip install -r requirements.txt`.
-
-## Prohibited
-
--   **NEVER** run `pip install` globally
--   **NEVER** override an existing dependency manager with a different one
+* 📘 **包管理器检测大表与多平台对照**：查阅 [`references/package_managers.md`](file:///C:/Users/hejia/.gemini/config/skills/managing-python-dependencies/references/package_managers.md)。

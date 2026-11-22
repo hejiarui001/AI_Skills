@@ -1,21 +1,21 @@
 ---
 name: skills-navigator
-version: 1.8.0
+version: 1.9.0
 description: >-
   Skills command center, update monitor, and quick navigation guide. Trigger when the
   user says "指令", "命令", "技能", "技能清单", "有哪些技能", "怎么用", "快捷指令", "检查更新",
-  "更新技能", "menu", "help", or asks about newly added skills. Displays all active skills
-  with clear example prompts, automatically checks for upstream skill updates, and
+  "更新技能", "修复技能", "skill-repair", "技能报错", "menu", "help", or asks about newly added skills. Displays all active skills
+  with clear example prompts, automatically checks for upstream skill updates, fixes damaged skill manifests, and
   proactively guides user workflow.
 license: Apache-2.0
 metadata:
-  version: v1.8.0
+  version: v1.9.0
   author: Antigravity
 ---
 
 # Skills Navigator & Update Monitor (技能导航与更新管家)
 
-本技能为本地 AI 研发与运维技能库的总控中枢、健康审计与上游更新监控器。
+本技能为本地 AI 研发与运维技能库的总控中枢、健康审计、上游更新与损坏修复一体化管家。
 
 ---
 
@@ -28,7 +28,7 @@ metadata:
    * **Windows (PowerShell)**: `python "$env:USERPROFILE\.gemini\config\skills\skills-navigator\scripts\check_skills_status.py"`
    * 若 `updates_count > 0`，显式横幅提示更新：“*检测到上游官方更新：[技能名] 有 X 个新提交待同步。回复‘更新 [技能名]’即可一键同步。*”
 
-2. **精炼领域技能清单 (Curated Cheatsheet)**：
+2. **精炼领域技能清单 (Curated Cheatsheet · 24 项)**：
 
 | 领域分类 | 核心技能 | 代表性触发意图 |
 | :--- | :--- | :--- |
@@ -36,13 +36,15 @@ metadata:
 | **02. 个人运维与学术** | `pc-maintenance-master`, `invoice-audit-master`, `git-worklog-reporter`, `zotero-assistant`, `everything-search`, `divergent-search-guide` | 电脑体检清理、竞赛发票对账总账、Git日报周报、文献检索、全盘秒搜、多维发散搜索 |
 | **03. 路由与网络穿透** | `routeros-network-master`, `p2p-streaming-master`, `google-sync-guard` | 主路由运维巡检、EasyTier低延迟串流/P2P压测、192.168.8.x命脉自检、Google离线防断网 |
 | **04. GCP 大数据** | `bigquery-master`, `gcs-storage-suite`, `gcp-airflow-composer-suite`, `gcp-data-engineering`, `gcp-governance-assets` | BigQuery优化/BQML、GCS存储设计、Airflow DAG、dbt/Dataform、ADC认证 |
-| **05. 治理与元能力** | `session-checkpoint-advisor`, `notebook-data-science`, `skills-navigator`, `accidental-data-loss-prevention` | 长会话回退与断点续接、数据科学Notebook规范、技能更新管理、高危破坏拦截 |
+| **05. 治理与元能力** | `session-checkpoint-advisor`, `notebook-data-science`, `skills-navigator`, `accidental-data-loss-prevention`, `managing-python-dependencies` | 长会话回退与断点续接、数据科学Notebook规范、技能更新与修复、高危破坏拦截、环境依赖治理 |
 
-3. **一键更新命令**：
-   * 更新指定技能：`python .../check_skills_status.py update <skill_name>`
+3. **管理与修复指令**：
+   * **一键更新技能**：`python .../check_skills_status.py update <skill_name>`
+   * **一键修复技能**：`python .../check_skills_status.py repair <skill_name>`
 
 ---
 
 ## 2. 深度参考手册
 
-* 📘 **全量 25 技能自然语言 Prompt 实战矩阵**：查阅 [`references/prompt_matrix.md`](file:///C:/Users/hejia/.gemini/config/skills/skills-navigator/references/prompt_matrix.md)。
+* 📘 **全量 24 技能自然语言 Prompt 实战矩阵**：查阅 [`references/prompt_matrix.md`](file:///C:/Users/hejia/.gemini/config/skills/skills-navigator/references/prompt_matrix.md)。
+* 📘 **技能异常诊断与 Manifest 修复指南**：查阅 [`references/skill_repair_guide.md`](file:///C:/Users/hejia/.gemini/config/skills/skills-navigator/references/skill_repair_guide.md)。
