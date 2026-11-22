@@ -1,6 +1,6 @@
 # 全量技能自然语言指令矩阵手册 (Prompt Matrix Reference)
 
-本文档承载 `skills-navigator` 的完整 21 项专业技能中英文常用指令、典型触发话术与实战 Prompt 矩阵。
+本文档承载 `skills-navigator` 的完整 25 项专业技能中英文常用指令、典型触发话术与实战 Prompt 矩阵。
 
 ---
 
@@ -90,6 +90,11 @@
 ---
 
 ### 05. Agent 运行治理与元能力 (Governance & Meta Suite)
+* 🛰️ **会话断点与回退续接顾问 (`session-checkpoint-advisor`)**:
+  - *“当前聊得太长了，帮我分析一下适合回退到哪一步”*
+  - *“这几个报错改偏了，如果回退记录我该退到哪，回退后我说什么”*
+  - *“生成一份会话回退续接指令与当前物理工作区代码基线”*
+  - *“分析当前电脑状态与未提交改动，给出最佳回退决策与防崩备份建议”*
 * 🔬 **数据科学与交互式笔记本规范 (`notebook-data-science`)**:
   - *“按照专业数据科学规范重构并审计这个 Jupyter Notebook”*
 * 🧭 **技能全景总控与更新 (`skills-navigator`)**:

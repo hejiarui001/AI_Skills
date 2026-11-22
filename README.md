@@ -5,7 +5,7 @@
 > **多端部署路径**：
 > - **Windows 11**：`C:\Users\hejia\.gemini\config\skills\`
 > - **Linux (Ubuntu)**：`~/.gemini/config/skills/`
-> **架构设计准则**：24 大高内聚全场景专业技能，涵盖嵌入式硬件全栈、系统运维、学术办公、云协同、大数据管道与治理元能力。
+> **架构设计准则**：25 大高内聚全场景专业技能，涵盖嵌入式硬件全栈、系统运维、学术办公、云协同、大数据管道与治理元能力。
 
 ---
 
@@ -34,7 +34,7 @@
 
 ---
 
-## 二、 五大领域 24 大精炼技能矩阵清单
+## 二、 五大领域 25 大精炼技能矩阵清单
 
 ### 1. 嵌入式与硬件全栈工程 (Embedded & Hardware Suite - 5 项)
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
@@ -71,11 +71,12 @@
 | **`gcp-data-engineering`** | `3.0.0` | `dbt-bigquery`<br>`dataform-bigquery`<br>`gcp-dataflow`<br>`gcp-spark`<br>`data-autocleaning`<br>`federate-lakehouse-catalog`<br>`bigtable-basics` | **全栈数据管道工程**：dbt / Dataform 双轨 SQLX 建模、Apache Beam (Dataflow)、Dataproc Spark 流批计算、Data Clean 质检、Lakehouse 编目与 Bigtable | [SKILL.md](./gcp-data-engineering/SKILL.md) |
 | **`gcp-governance-assets`** | `3.0.0` | `discovering-gcp-data-assets`<br>`google-cloud-auth-verification`<br>`enforcing-resource-attribution`<br>`schema-mapping`<br>`building-data-apps` | **GCP 治理与数据应用开发**：ADC 认证前置校验、资源标签强制注入、资产拓扑发现、Schema 映射与前端数据大屏 (React/Streamlit) 构建 | [SKILL.md](./gcp-governance-assets/SKILL.md) |
 
-### 5. Agent 运行治理与元能力 (Governance & Meta-Skills Suite - 5 项)
+### 5. Agent 运行治理与元能力 (Governance & Meta-Skills Suite - 6 项)
 | 技能标识 | 当前版本 | 整合吸收的原技能 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- | :--- |
+| **`session-checkpoint-advisor`** | `1.0.0` | - | 长会话膨胀治理、断点态势感知、代码资产防崩门禁与破局重生 Prompt 合成 | [SKILL.md](./session-checkpoint-advisor/SKILL.md) |
 | **`notebook-data-science`** | `2.0.0` | `ml-best-practices`<br>`notebook-guidance` | **数据科学与交互式笔记本规范**：机器学习建模评估范式 (ML Best Practices) 与 Jupyter Notebook 交互式数据分析规约 | [SKILL.md](./notebook-data-science/SKILL.md) |
-| **`skills-navigator`** | `1.7.0` | - | 技能总控台、快捷命令索引、24 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
+| **`skills-navigator`** | `1.8.0` | - | 技能总控台、快捷命令索引、25 大精炼技能健康度多维扫描与主动升级监测 | [SKILL.md](./skills-navigator/SKILL.md) |
 | **`accidental-data-loss-prevention`**| `1.0.0` | - | 高危破坏性操作防御机制（DROP / RM / DELETE 强制拦截确认） | [SKILL.md](./accidental-data-loss-prevention/SKILL.md) |
 | **`managing-python-dependencies`** | `1.0.0` | - | Python 环境依赖治理与虚拟环境防全局污染守则 | [SKILL.md](./managing-python-dependencies/SKILL.md) |
 | **`skill-repair`** | `1.0.0` | - | Agent 技能安装依赖异常诊断与 manifest 自动修复引擎 | [SKILL.md](./skill-repair/SKILL.md) |

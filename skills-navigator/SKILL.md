@@ -1,6 +1,6 @@
 ---
 name: skills-navigator
-version: 1.7.0
+version: 1.8.0
 description: >-
   Skills command center, update monitor, and quick navigation guide. Trigger when the
   user says "指令", "命令", "技能", "技能清单", "有哪些技能", "怎么用", "快捷指令", "检查更新",
@@ -9,7 +9,7 @@ description: >-
   proactively guides user workflow.
 license: Apache-2.0
 metadata:
-  version: v1.7.0
+  version: v1.8.0
   author: Antigravity
 ---
 
@@ -36,7 +36,7 @@ metadata:
 | **02. 个人运维与学术** | `pc-maintenance-master`, `invoice-audit-master`, `git-worklog-reporter`, `zotero-assistant`, `everything-search`, `divergent-search-guide` | 电脑体检清理、竞赛发票对账总账、Git日报周报、文献检索、全盘秒搜、多维发散搜索 |
 | **03. 路由与网络穿透** | `routeros-network-master`, `p2p-streaming-master`, `google-sync-guard` | 主路由运维巡检、EasyTier低延迟串流/P2P压测、192.168.8.x命脉自检、Google离线防断网 |
 | **04. GCP 大数据** | `bigquery-master`, `gcs-storage-suite`, `gcp-airflow-composer-suite`, `gcp-data-engineering`, `gcp-governance-assets` | BigQuery优化/BQML、GCS存储设计、Airflow DAG、dbt/Dataform、ADC认证 |
-| **05. 治理与元能力** | `notebook-data-science`, `skills-navigator`, `accidental-data-loss-prevention` | 数据科学Notebook规范、技能更新管理、高危破坏拦截 |
+| **05. 治理与元能力** | `session-checkpoint-advisor`, `notebook-data-science`, `skills-navigator`, `accidental-data-loss-prevention` | 长会话回退与断点续接、数据科学Notebook规范、技能更新管理、高危破坏拦截 |
 
 3. **一键更新命令**：
    * 更新指定技能：`python .../check_skills_status.py update <skill_name>`
@@ -45,4 +45,4 @@ metadata:
 
 ## 2. 深度参考手册
 
-* 📘 **全量 24 技能自然语言 Prompt 实战矩阵**：查阅 [`references/prompt_matrix.md`](file:///C:/Users/hejia/.gemini/config/skills/skills-navigator/references/prompt_matrix.md)。
+* 📘 **全量 25 技能自然语言 Prompt 实战矩阵**：查阅 [`references/prompt_matrix.md`](file:///C:/Users/hejia/.gemini/config/skills/skills-navigator/references/prompt_matrix.md)。

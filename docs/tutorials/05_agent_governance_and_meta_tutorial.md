@@ -1,7 +1,7 @@
 # Agent 运行治理、元能力与安全守则教程 (Agent Governance & Meta Tutorial)
 
 > **领域定位**：Antigravity Agent 自进化机制、技能库健康巡检与上游同步、高危破坏拦截、Python 虚拟环境隔离与数据科学规范  
-> **联动技能群**：`skills-navigator`、`notebook-data-science`、`accidental-data-loss-prevention`、`managing-python-dependencies`、`skill-repair`  
+> **联动技能群**：`skills-navigator`、`session-checkpoint-advisor`、`notebook-data-science`、`accidental-data-loss-prevention`、`managing-python-dependencies`、`skill-repair`  
 > **更新机制**：随 Agent 技能扩展、上游同步与环境适配持续循环演进
 
 ---
@@ -50,6 +50,11 @@
 * **核心目标**：诊断损坏的技能 manifest 与依赖死锁，恢复技能索引。
 * **【联动技能】**：[`skill-repair`](../../skill-repair/SKILL.md)
   - *触发示例*：“诊断并修复安装失败的技能清单”。
+
+### 6. 长会话回退、断点研判与破局续接
+* **核心目标**：当会话过长、上下文被污染或陷入重试死锁时，精准研判最佳回退位点，执行工作区资产防崩检查，自动合成即插即用的破局重生 Prompt。
+* **【联动技能】**：[`session-checkpoint-advisor`](../../session-checkpoint-advisor/SKILL.md)
+  - *触发示例*：“会话太长了，帮我分析回退节点”、“回退后我要说什么”。
 
 ---
 

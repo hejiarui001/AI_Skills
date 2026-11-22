@@ -31,7 +31,7 @@ DOMAINS = {
         "gcp-data-engineering", "gcp-governance-assets"
     ],
     "05_Governance_Meta": [
-        "skills-navigator", "notebook-data-science", "accidental-data-loss-prevention",
+        "skills-navigator", "session-checkpoint-advisor", "notebook-data-science", "accidental-data-loss-prevention",
         "managing-python-dependencies", "skill-repair"
     ]
 }

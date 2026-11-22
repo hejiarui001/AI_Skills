@@ -6,6 +6,31 @@
 
 ---
 
+## [v2.5.0] - 2026-11-22 (会话断点与回退续接顾问技能 + 教程联动)
+
+**Tag**: `v2.5.0` | **新增技能**: `session-checkpoint-advisor` (`v1.0.0`) | **总技能数**: 25 项
+
+<details open>
+<summary>🌟 新增技能与架构演进 (New Skill & Architecture Evolution)</summary>
+
+* **上线会话回退与断点续接顾问 (`session-checkpoint-advisor` v1.0.0)**：
+  - **核心定位**：专为复杂长会话、反复调试死锁与多任务分叉设计的上下文态势研判与安全回退总控中枢；
+  - **破解三大痛点**：
+    1. **不知退到哪**：提供“拐点微回退 (Micro-Rewind) / 契约重构回退 (Contract Baseline) / 空白会话续接 (Clean-Slate)”三梯队方案；
+    2. **担心丢代码**：设计回退前物理工作区保全门禁（Git Stash / Commit Guard 与开发进程占用探测）；
+    3. **回退不知怎么开口**：自动合成即插即用型“破局重生 Prompt (Resumption Prompt)”，涵盖物理磁盘现实、已验证事实、死路黑名单与单一聚焦目标；
+  - **跨平台辅助工具**：`scripts/analyze_checkpoint.py` 自动分析 Git 资产与进程，支持一键参数化合成续接提示词；
+  - **实战手册下沉**：
+    - `references/checkpoint_decision_tree.md`：会话回退决策树与复杂场景位点速查表；
+    - `references/prompt_templates.md`：工业级破局重生 Prompt 模板库（驱动破局、全新会话交接、上下位机契约重塑）。
+* **技能总控与教程联动演化**：
+  - `skills-navigator` 升级至 `v1.8.0`，纳入第 25 个专业技能，更新提示词矩阵与多维状态审计脚本；
+  - 联动更新 [05_Agent 运行治理、元能力与安全守则教程](./docs/tutorials/05_agent_governance_and_meta_tutorial.md)。
+
+</details>
+
+---
+
 ## [v2.4.0] - 2026-11-20 (发散搜索与多维信息调研导航技能 + 教程联动)
 
 **Tag**: `v2.4.0` | **新增技能**: `divergent-search-guide` (`v1.0.0`) | **总技能数**: 24 项
