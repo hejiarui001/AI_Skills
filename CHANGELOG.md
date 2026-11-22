@@ -6,6 +6,27 @@
 
 ---
 
+## [v2.8.0] - 2026-11-23 (RouterOS 运维技能固化最小权限控制 PoLP 与 agent-operator IAM 策略)
+
+**Tag**: `v2.8.0` | **功能演进**: `routeros-network-master` (`v1.2.0`)
+
+<details open>
+<summary>🌟 工业级最小权限控制与 IAM 策略红线 (PoLP & IAM Hardening)</summary>
+
+* **`routeros-network-master` 升级至 v1.2.0**：
+  - **严禁过度授权红线**：禁止在运维、排障中向用户索要或提议 `full` 组等全量特权；
+  - **固化受限运维组 `agent-operator`**：
+    - **白名单 (Whitelist)**：`ssh,read,write,test,sensitive,api,rest-api`（满足状态采集、`/export` 配置脚本导出与基础安全操作）；
+    - **黑名单 (Blacklist)**：`!local,!telnet,!ftp,!reboot,!policy,!winbox,!password,!web,!sniff,!romon`（严格封死破坏性接口与特权逃逸）；
+  - **备份权限边界规范化**：
+    - 针对 `/system/backup/save` 涉及系统全量凭据哈希（需 `password`/`policy`）导致的权限限制，明确禁止通过赋予 `full` 组绕过；
+    - 确立 `/export file=...` 纯文本配置导出为自动化灾备的标准途径，二进制 `.backup` 留交系统管理员手动或本地定时任务执行；
+  - **新增 SOP 手册**：在 `references/routeros_ops_sop.md` 中新增 `SOP-07: 工业级最小权限控制 (PoLP) 与自动化运维账号 IAM 固化`。
+
+</details>
+
+---
+
 ## [v2.7.0] - 2026-11-22 (会话断点顾问注入 52 场真实长会话实战经验)
 
 **Tag**: `v2.7.0` | **功能演进**: `session-checkpoint-advisor` (`v1.1.0`)

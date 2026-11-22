@@ -64,3 +64,21 @@
 ## SOP-06: 校园网/宽带 IPv6 无前缀委派 (PD) 路由限制诊断
 * **故障特征**：PPPoE 下发了单个 `/64` 地址，但下级局域网设备无法通过 DHCPv6-PD 获取公网 IPv6 前缀。
 * **治理方案**：在 RouterOS 启用 NDP 代理与 IPv6 Relay，或切换为 IPv6 NAT66 模式穿透局域网。
+
+---
+
+## SOP-07: 工业级最小权限控制 (PoLP) 与自动化运维账号 IAM 固化
+* **核心原则**：严禁向用户索要或提议赋予 `full` 组等全量管理员权限；自动化运维必须收敛在专用受限组。
+* **RouterOS `agent-operator` 组规约**：
+  1. **组策略配置**：
+     ```routeros
+     /user/group/add name=agent-operator policy=ssh,read,write,test,sensitive,api,rest-api
+     ```
+  2. **权限白名单与黑名单对照**：
+     * **放行 (Whitelist)**：`ssh,read,write,test,sensitive,api,rest-api`（满足 REST API 状态采集、`/export` 配置导出与受限指令执行）；
+     * **剥离 (Blacklist)**：`!local,!telnet,!ftp,!reboot,!policy,!winbox,!password,!web,!sniff,!romon`（阻断硬重启、用户组修改、敏感密码哈希读取与网络抓包）；
+  3. **备份权限边界治理**：
+     * `/system/backup/save` 在 RouterOS v7 中因包含全系统用户密码哈希，执行必须具备 `password` 或 `policy` 策略，故 `agent-operator` 执行时会报 `not enough permissions (9)`；
+     * 严禁通过将账号提升至 `full` 组来消除该报错；
+     * 自动化备份统一调用 `/export file=...` 导出纯文本配置脚本（受 `sensitive` 放行支持），具备 100% 灾难恢复能力且不触碰系统密码哈希；
+     * 若必须生成二进制 `.backup` 镜像，必须交由 RouterOS 原生计划任务（Scheduler 以管理员身份触发）或由网络管理员手动登录生成。
