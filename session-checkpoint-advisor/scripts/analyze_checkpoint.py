@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 Session Checkpoint & Workspace State Analyzer (跨平台会话断点与工作区状态分析器)
+版本: v1.1.0
 
 职能：
 1. 自动定位当前代码仓/工作区根目录，提取 Git 改动资产（修改、新增、暂存）；
 2. 探测当前系统环境（Windows / Linux）与活跃开发调试进程；
-3. 输出高密度结构化态势看板与三梯队回退位点建议；
-4. 自动合成即插即用型“破局重生 Prompt (Resumption Prompt)”。
+3. 输出高密度结构化态势看板、物理隔离定心丸与三梯队回退位点建议；
+4. 支持通过参数生成带视觉锚点指纹的即插即用型“破局重生 Prompt (Resumption Prompt)”。
 """
 
 import os
@@ -22,7 +23,7 @@ from pathlib import Path
 DEV_PROCESSES = {
     "pyocd", "openocd", "stlink", "jlink", "vofa+", "lceda-pro",
     "keil", "uvision", "ninja", "cmake", "gcc", "arm-none-eabi-gcc",
-    "sunshine", "easytier", "tailscale", "clash"
+    "sunshine", "easytier", "tailscale", "clash", "syncthing"
 }
 
 def get_current_os():
@@ -75,7 +76,6 @@ def inspect_git_state(git_root):
             "recent_commits": []
         }
 
-    # 获取短状态
     _, status_out, _ = run_cmd(["git", "status", "--porcelain"], git_root)
     modified = []
     untracked = []
@@ -94,7 +94,6 @@ def inspect_git_state(git_root):
         elif x == '?' and y == '?':
             untracked.append(file_path)
 
-    # 获取最近 3 条提交
     _, log_out, _ = run_cmd(["git", "log", "-n", "3", "--oneline"], git_root)
     commits = [c.strip() for c in log_out.splitlines() if c.strip()]
 
@@ -180,12 +179,13 @@ def generate_resumption_prompt(git_info, target_goal=None, dead_ends=None):
     return "\n".join(prompt_lines)
 
 def main():
-    parser = argparse.ArgumentParser(description="Session Checkpoint & Workspace State Analyzer")
+    parser = argparse.ArgumentParser(description="Session Checkpoint & Workspace State Analyzer v1.1.0")
     parser.add_argument("--cwd", default=os.getcwd(), help="Target workspace path")
     parser.add_argument("--json", action="store_true", help="Output in JSON format")
     parser.add_argument("--prompt", action="store_true", help="Generate ready-to-use resumption prompt")
     parser.add_argument("--target", default=None, help="Target goal for resumption prompt")
     parser.add_argument("--dead-ends", default=None, help="Documented dead ends or errors to avoid")
+    parser.add_argument("--anchor", default=None, help="User prompt snippet anchor for visual UI guidance")
 
     args = parser.parse_args()
 
@@ -195,6 +195,7 @@ def main():
     current_os = get_current_os()
 
     data = {
+        "version": "1.1.0",
         "os": current_os,
         "git": git_info,
         "active_dev_processes": dev_procs,
@@ -218,6 +219,8 @@ def main():
     # 默认输出 Markdown 态势看板
     print("# 🛰️ 会话断点与工作区态势诊断看板 (Checkpoint & Workspace Snapshot)")
     print()
+    print("> 🛡️ **物理资产安全定心丸**：IDE 会话回退**仅影响模型上下文记忆与对话树**，本地物理磁盘代码、远端服务器 Docker 容器及单片机 Flash 固件 **100% 稳定常驻，绝不丢失**！")
+    print()
     print(f"> **宿主系统**：{current_os} | **工作区根**：`{git_info['root']}` | **当前分支**：`{git_info['branch']}`")
     print()
     print("## 1. 物理工作区资产状态 (Physical Code Reality)")
@@ -233,22 +236,28 @@ def main():
             print("  - **新增未跟踪文件**:")
             for f in git_info["untracked"][:5]:
                 print(f"    * `{f}`")
-        print("\n> [!CAUTION] **回退前安全门禁**：回退会话不会改变磁盘代码，但为防止回退后模型意外覆盖，强烈建议先在终端执行 `git stash save \"pre-rewind\"` 或 `git commit -am \"wip: pre-rewind\"`！")
+        print("\n> [!CAUTION] **回退前安全门禁**：为防止回退后模型产生覆盖，建议在终端执行 `git stash save \"pre-rewind\"` 或 `git commit -am \"wip: pre-rewind\"` 固化物理代码！")
     else:
         print("✅ **工作区纯净**：无未提交改动，磁盘代码与 Git 仓库完全同步。")
 
     print("\n## 2. 活跃研发与硬件进程 (Active Dev Processes)")
     if dev_procs:
-        print(f"⚠️ **正在运行的关键进程**：`{', '.join(dev_procs)}` (注意：若涉及串口或烧录探针，回退后请确保端口未被独占)")
+        print(f"⚠️ **正在运行的关键进程**：`{', '.join(dev_procs)}`")
+        print("  - 提示：若涉及串口监控或烧录探针，请确保端口释放；若为会话内拉起的后台子任务，回退后会被 IDE 终止，需准备重新拉起。")
     else:
         print("✅ **无独占研发进程**：无冲突的烧录/串口工具在运行。")
 
-    print("\n## 3. 回退推荐位点建议 (Recommended Checkpoint Targets)")
-    print("| 梯队方案 | 推荐位点特征 | 适用场景 | 预期收益 |")
+    print("\n## 3. 回退推荐位点与操作指引")
+    if args.anchor:
+        print(f"> 💡 **界面视觉锚点**：请向上滚动聊天界面，找到包含 `【{args.anchor}】` 的那轮提问，点击右上角小弯箭头（`↶` 编辑/回退），粘贴下方提示词发送。")
+    else:
+        print("> 💡 **操作提示**：找到推荐目标节点，点击消息右上角小弯箭头（`↶` 编辑/回退），粘贴下方提示词发送。")
+
+    print("\n| 梯队方案 | 推荐位点特征 | 适用场景 | 预期收益 |")
     print("| :--- | :--- | :--- | :--- |")
-    print("| **方案 A: 拐点微回退** | 首次报错或思路分叉提问前 | 方向基本正确，仅最近 1~2 个函数陷入报错循环 | 保留绝大部分对话成果，最小代价重试 |")
-    print("| **方案 B: 契约重构回退** *(推荐)* | 架构设计/头文件/数据结构刚确定时 | 代码多次打补丁产生腐化、上下文充满报错日志 | 洗掉全部试错噪声，在干净上下文中直奔实现 |")
-    print("| **方案 C: 空白会话续接** | 直接开启全新窗口 (无上下文) | 会话总长极大 (>15万Token)、模型注意力严重稀释 | 彻底恢复首字响应速度，杜绝注意力漂移 |")
+    print("| **方案 A: 拐点微回退** | 首次报错或思路分叉提问前 | 30 轮内局部函数或参数陷入报错循环 | 保留绝大部分对话成果，最小代价重试 |")
+    print("| **方案 B: 契约重构回退** *(推荐)* | 架构设计/头文件/协议刚确定时 | 代码多次修补产生腐化、协议漂移 | 洗掉全部试错噪声，在干净上下文中直奔实现 |")
+    print("| **方案 C: 里程碑结项新开** | 直接开启全新窗口 (无上下文) | 50 轮以上超长任务或大模块阶段完结 | 彻底恢复首字响应速度，杜绝注意力漂移 |")
 
     print("\n## 4. 破局重生 Prompt 预览 (Resumption Prompt Blueprint)")
     print("```markdown")

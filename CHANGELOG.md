@@ -6,6 +6,28 @@
 
 ---
 
+## [v2.7.0] - 2026-11-22 (会话断点顾问注入 52 场真实长会话实战经验)
+
+**Tag**: `v2.7.0` | **功能演进**: `session-checkpoint-advisor` (`v1.1.0`)
+
+<details open>
+<summary>🌟 生产经验提炼与深度进化 (Ground-Truth Evolution & Pitfall Defenses)</summary>
+
+* **`session-checkpoint-advisor` 升级至 v1.1.0**：
+  - **注入 52 场真实会长会话实战经验**：深度挖掘 1151 步小主机开发、678 步网络装机、329 步边缘 VPS 等跨天长工程中的多次真实回退交互；
+  - **破解四大实战暗坑**：
+    1. **物理隔离定心丸**：首句声明 IDE 会话回退仅影响上下文记忆，磁盘代码、远端 Docker 容器与单片机固件 100% 稳定常驻；
+    2. **IDE 后台子进程强杀预警**：提前审计会话拉起的常驻 background tasks，防止回退导致后台服务意外被杀，提前准备自启/重启指令；
+    3. **界面视觉原文指纹定位**：强制输出用户当时提问的“原话特征片段 + 时间戳”，让用户 2 秒内在千行聊天流中找到弯箭头（`↶`）；
+    4. **回退前成果 DoD 终极验收**：向用户出具已落盘文件与已监听端口的全绿完成度证明，消除回退心理负担；
+  - **脚本与手册联动**：
+    - 辅助脚本 `analyze_checkpoint.py` 原生支持 `--anchor` 视觉锚点生成；
+    - 新增权威参考手册：[`references/ground_truth_lessons.md`](./session-checkpoint-advisor/references/ground_truth_lessons.md)。
+
+</details>
+
+---
+
 ## [v2.6.0] - 2026-11-22 (技能结构化合并与治理域精炼脱水)
 
 **Tag**: `v2.6.0` | **合并吸纳**: `skill-repair` ➔ `skills-navigator` (`v1.9.0`) | **总技能数**: 24 项
