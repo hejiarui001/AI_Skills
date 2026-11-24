@@ -6,6 +6,25 @@
 
 ---
 
+## [v2.9.0] - 2026-11-24 (RouterOS 运维技能新增二层硬件卸载、Bridge Horizon 端口隔离与规则有效性断言规约)
+
+**Tag**: `v2.9.0` | **功能演进**: `routeros-network-master` (`v1.3.0`)
+
+<details open>
+<summary>🌟 二层网桥硬件卸载与端口隔离规约 (Bridge Horizon & Zero Invalid Policy)</summary>
+
+* **`routeros-network-master` 升级至 v1.3.0**：
+  - **二层硬件端口隔离铁律**：严禁在网桥从属物理端口之间使用三层 IP Filter 进行隔离（会被交换芯片 Hardware Offload 绕过且触发 ROS v7 invalid 报错）；强制使用二层 `Bridge Port Horizon` (`horizon=10`) 借助交换芯片 ASIC 线速丢弃，实现 0% CPU 损耗的硬件级强隔离；
+  - **从属物理口匹配语义修复**：在 IP Firewall 中严禁直接指定物理从属口作为 `in-interface`，强制统一修正为采用主网桥 (`bridge-lan`) 结合源/目的 IP 地址（`src-address`）进行精确放行；
+  - **自动化巡检断言门禁**：巡检引擎必须嵌入 `invalid == true` 拦截与关键规则零命中（`packets == 0`）审计门禁，杜绝“配置存在即生效”的假阳性误判；
+  - **新增 SOP 与避坑手册**：
+    - 在 `references/routeros_ops_sop.md` 中新增 `SOP-08: 网桥从属端口二层 Horizon 隔离与规则失效审计`；
+    - 新增核心参考手册：[`references/hardware_offload_vs_firewall_pitfalls.md`](./routeros-network-master/references/hardware_offload_vs_firewall_pitfalls.md)。
+
+</details>
+
+---
+
 ## [v2.8.0] - 2026-11-23 (RouterOS 运维技能固化最小权限控制 PoLP 与 agent-operator IAM 策略)
 
 **Tag**: `v2.8.0` | **功能演进**: `routeros-network-master` (`v1.2.0`)

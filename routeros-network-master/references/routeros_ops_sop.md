@@ -82,3 +82,22 @@
      * 严禁通过将账号提升至 `full` 组来消除该报错；
      * 自动化备份统一调用 `/export file=...` 导出纯文本配置脚本（受 `sensitive` 放行支持），具备 100% 灾难恢复能力且不触碰系统密码哈希；
      * 若必须生成二进制 `.backup` 镜像，必须交由 RouterOS 原生计划任务（Scheduler 以管理员身份触发）或由网络管理员手动登录生成。
+
+
+---
+
+## SOP-08: 网桥从属端口二层 Horizon 隔离与规则失效审计
+* **故障特征**：
+  1. 在三层 Filter 配置端口隔离规则（如 `in-interface=ether2 out-interface=ether3 action=drop`），但数据包依然可以二层互通或计数器显示 `0 packets`；
+  2. 规则被系统标记为红字或 `invalid: true`，报错 `use master instead (bridge-lan)`。
+* **根因**：物理端口加入 Bridge 后三层属性被剥夺；且同网桥流量被交换芯片硬件卸载（Hw-Offload）直接二层线速交换，根本不上送 CPU 内核三层协议栈。
+* **治理标准流程**：
+  1. **二层硬件隔离生效**：
+     ```routeros
+     /interface/bridge/port/set [find interface=ether2] horizon=10
+     /interface/bridge/port/set [find interface=ether3] horizon=10
+     ```
+  2. **三层从属口语法修复**：
+     将所有在 `/ip firewall filter` 中直接指定物理从属口的规则，统一修正为 `in-interface=bridge-lan` 搭配 `src-address=<目标IP>`；
+  3. **清理失效规则**：移除原三层无用的 L3 跨网桥端口双向丢弃规则；
+  4. **运行全量健康断言**：运行自动化巡检，确认全表 `invalid: true` 数量彻底归零。
