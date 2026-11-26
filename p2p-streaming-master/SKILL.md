@@ -1,10 +1,7 @@
 ---
 name: p2p-streaming-master
 version: 1.0.0
-description: >-
-  Domestic high-performance P2P mesh networking, Moonlight & Sunshine ultra-low latency game/desktop streaming,
-  dual-rail NAT traversal (EasyTier primary + Tailscale fallback), P2P stress testing, and Android tablet remote console.
-  Trigger on: "easytier", "tailscale", "p2p", "穿透", "串流", "moonlight", "sunshine", "打洞", "中继", "直连", "压测", "平板串流", "虚拟专网", "mesh".
+description: "国内 P2P Mesh 组网与超低延迟串流：EasyTier + Tailscale 双轨穿透、Moonlight/Sunshine 调优与阶梯压测。Trigger on: easytier, tailscale, p2p, 串流, moonlight, sunshine, 穿透, 打洞。"
 license: Apache-2.0
 metadata:
   version: v1.0.0

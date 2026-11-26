@@ -1,7 +1,7 @@
 ---
 name: divergent-search-guide
 version: 1.0.0
-description: "发散搜索与多维信息调研导航 (Lateral Divergent Search & Multi-Channel Reconnaissance Guide). 提供启发式发散思维导引与多渠道交叉调研模型，专治单一检索盲区、信息孤岛与低效额度消耗。Trigger on: '搜索', '查一下', '找找看', '调研', '怎么申请', '流程', '对比', '攻略', 'search', '避坑'."
+description: "启发式发散搜索与多维调研导航：社区穿透与交叉对比，专治检索盲区与额度浪费。Trigger on: 搜索, 查一下, 调研, 怎么申请, 对比, 攻略, 避坑。"
 ---
 
 # Divergent Search & Reconnaissance Guide

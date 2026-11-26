@@ -1,11 +1,7 @@
 ---
 name: git-worklog-reporter
 version: 1.0.0
-description: >-
-  Extracts and transforms local Git commits, file diffs, and code statistics into structured,
-  executive-ready engineering daily reports, weekly updates, and standup logs. Use when the user
-  asks to generate a work report, daily summary, weekly update, or project progress recap
-  (e.g., "帮我写今天的日报", "根据这周的git提交生成一份周报", "总结一下我最近修改的代码", "汇报工作进展").
+description: "Git 研发日报/周报生成器：自动提取本地 Git 提交与文件变更统计并输出高管级结构化汇报。Trigger on: 日报, 周报, 总结代码, 汇报工作进展。"
 license: Apache-2.0
 metadata:
   version: v1.0.0

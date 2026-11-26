@@ -1,11 +1,7 @@
 ---
 name: zotero-assistant
 version: 1.0.0
-description: >-
-  Connects to and searches the user's local Zotero reference library (zotero.sqlite)
-  in read-only mode, locates full-text PDF attachments, and extracts research metadata.
-  Use when the user asks about their papers, literature, citations, datasheets, or documents
-  stored in Zotero (e.g., "查一下我Zotero里的论文", "找找我文献库里的STM32资料").
+description: "本地 Zotero 文献库 (zotero.sqlite) 只读检索、芯片 Datasheet 与 PDF 附件元数据提取。Trigger on: Zotero, 查论文, 找文献, 查芯片资料。"
 license: Apache-2.0
 metadata:
   version: v1.0.0

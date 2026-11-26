@@ -1,12 +1,7 @@
 ---
 name: bigquery-master
 version: 3.0.0
-description: >-
-  BigQuery Master Suite: End-to-end BigQuery SQL optimization, Machine Learning (BQML),
-  Generative AI functions, BigFrames DataFrames Python API, Property Graph (GQL) querying,
-  and Data Transfer Service (DTS) ingestion.
-  Trigger on: "BigQuery", "bqsql", "bigquery-sql", "BQML", "BigFrames", "GQL", "DTS",
-  "BigQuery ML", "BigQuery transfer", "BigQuery graph", "BigQuery optimization".
+description: "BigQuery 全栈套件：SQL 优化、BQML 机器学习、GenAI 函数、BigFrames Python、GQL 图查询与 DTS 传输。Trigger on: BigQuery, bqsql, BQML, BigFrames, GQL, DTS。"
 license: Apache-2.0
 metadata:
   version: v3.0.0

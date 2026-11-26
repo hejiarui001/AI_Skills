@@ -1,11 +1,7 @@
 ---
 name: embedded-engineering-master
 version: 2.5.0
-description: >-
-  Flagship full-stack embedded hardware & software engineering orchestrator for STM32, ARM Cortex-M, and ESP32/RISC-V microcontrollers.
-  Unifies the complete end-to-end hardware-software pipeline: EasyEDA circuit/pinout verification -> UCA/PIA multi-tier firmware architecture -> Headless compilation (Keil/CMake/idf.py) -> pyOCD/esptool hardware flashing -> industrial serial telemetry (UART/VOFA+) -> milestone checkpointing.
-  Featuring Autonomous Architecture Tiering (Compact Mode vs UCA Comprehensive Mode), Blackboard state bus, Policy chain engine, Matrix Break-Before-Make safety, 3-in-1 Unified Protocol, and strict Zero Desktop Intrusion (未获明确允许严禁向宿主桌面落盘快捷方式/文件).
-  Trigger when the user asks for end-to-end embedded development, hardware-software co-debugging, full-chain feature delivery, board bring-up, or full lifecycle diagnostics (e.g., "全链路开发", "端到端调通", "从原理图到板子跑通", "板子死机全系统排查", "软硬件全栈闭环").
+description: "STM32/Cortex-M/ESP32 全栈嵌入式软硬件编排器：引脚校验、UCA/PIA 固件、烧录与串口闭环。Trigger on: 全链路开发, 端到端调通, 板子死机排查, 软硬件全栈。"
 license: Apache-2.0
 metadata:
   version: v2.5.0

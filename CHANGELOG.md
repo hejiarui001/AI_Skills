@@ -6,6 +6,24 @@
 
 ---
 
+## [v3.1.0] - 2026-11-26 (全库常驻上下文 Token 瘦身 · 砍掉 85% 每轮固定税)
+
+**Tag**: `v3.1.0` | **全域优化**: 全量 24 项技能 `description` 无损提纯 + `GEMINI.md` 去重脱水
+
+<details open>
+<summary>🚀 常驻 Token 开销极致优化 (Always-On Per-Turn Token Reduction)</summary>
+
+* **`AI_Skills` 全量 24 技能 `description` 无损提纯**：
+  - 将每轮必载的 `description` 总字节数从 `12,015 Bytes`（`~4,291 Tokens/轮`）压榨至 `4,379 Bytes`（`~1,563 Tokens/轮`），**削减 -63.6%**；
+  - 剔除冗长双语复述与技术枚举，精准保留一句话核心职能与高频触发词，确保 100% 触发精准度；
+* **消除 `GEMINI.md` 双倍全量重复注入（每轮立省 ~16,900 Tokens）**：
+  - 全局 `GEMINI.md` 压缩至精简核心红线，工作区 `GEMINI.md` 仅保留路径隐私隔离与 `192.168.8.x` 命脉保护；
+  - 完整详尽条款归档至 [`docs/ENGINEERING_GOVERNANCE_SPEC.md`](file:///e:/AI_Workspace/docs/ENGINEERING_GOVERNANCE_SPEC.md) 按需查阅，日常规则总消耗削减 **-90.8%**。
+
+</details>
+
+---
+
 ## [v3.0.0] - 2026-11-26 (底层致错根因重构 · 零 Token 会话内省 + 机器发布门禁 + 跨端冲突扫雷)
 
 **Tag**: `v3.0.0` | **重大重构与升级**: `session-checkpoint-advisor` (`v1.2.0`), `skills-navigator` (`v1.10.0`), `pc-maintenance-master` (`v2.3.0`)

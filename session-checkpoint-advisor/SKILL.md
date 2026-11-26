@@ -1,7 +1,7 @@
 ---
 name: session-checkpoint-advisor
 version: 1.2.0
-description: "会话回退与断点续接顾问 (Session Checkpoint & Rewind Advisor). 当会话过长、上下文被污染或陷入重试死锁时，利用本地 transcript 零 Token 内省，精准输出时间轴锚点、执行网络与物理工作区防崩门禁，并生成带“免探核准印章”的破局重生 Prompt. Trigger on: '回退', '回退记录', '会话太长', '回到之前', '重新开始', '上下文太长', '断点回退', '回退分析', 'rewind', 'checkpoint', '重开会话', '精简上下文'."
+description: "会话回退与断点续接顾问：本地 0 Token 内省、精确时间轴锚点、二轮熔断、安全门禁与免探接力 Prompt。Trigger on: 回退, 回退记录, 会话太长, 重开会话, 精简上下文, rewind, checkpoint。"
 license: Apache-2.0
 metadata:
   version: v1.2.0

@@ -1,11 +1,7 @@
 ---
 name: routeros-network-master
 version: 1.3.0
-description: >-
-  MikroTik RouterOS (v7.x) system maintenance, dual-path automated disaster recovery, SD storage health governance,
-  Tailscale P2P mesh & UPnP cone NAT traversal, Clash TUN bypass arbitration, 192.168.8.x remote lifeline continuous protection,
-  Bridge Port Horizon hardware-offload isolation, and strict Principle of Least Privilege (PoLP) / IAM group hardening.
-  Trigger on: "routeros", "ros", "mikrotik", "p2p", "tailscale", "打洞", "中继", "直连", "双栈", "ipv6", "sd卡挂载", "dude", "user-manager", "巡检路由", "远程防失联", "最小权限", "agent-operator", "horizon", "硬件隔离".
+description: "MikroTik RouterOS v7 运维：双轨灾备、192.168.8.x 命脉防护、Bridge Horizon 硬件隔离与 agent-operator 最小权限。Trigger on: routeros, ros, mikrotik, 巡检路由, horizon, 远程防失联。"
 license: Apache-2.0
 metadata:
   version: v1.3.0

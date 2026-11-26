@@ -1,12 +1,7 @@
 ---
 name: gcs-storage-suite
 version: 3.0.0
-description: >-
-  Google Cloud Storage (GCS) Master Suite: Secure bucket architecture and provisioning,
-  object lifecycle management, high-performance Cloud Storage FUSE POSIX mounts (gcsfuse),
-  and comprehensive GCS security & IAM audit (SAIF compliance).
-  Trigger on: "GCS", "Cloud Storage", "storage bucket", "gcsfuse", "FUSE mount",
-  "gsutil", "gcloud storage", "bucket security", "bucket design".
+description: "Google Cloud Storage (GCS) 套件：存储桶架构、生命周期治理、gcsfuse POSIX 挂载与 IAM 安全审计。Trigger on: GCS, Cloud Storage, gcsfuse, gsutil, bucket security。"
 license: Apache-2.0
 metadata:
   version: v3.0.0

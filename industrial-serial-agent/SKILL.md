@@ -1,10 +1,7 @@
 ---
 name: industrial-serial-agent
 version: 1.2.0
-description: >-
-  Industrial-grade serial (UART / COM port) device discovery, command transmission,
-  frame parser, and VOFA+ telemetry log capture across Windows and Linux environments.
-  Trigger on: "serial", "uart", "com port", "vofa+", "ttyUSB", "ttyACM", "baudrate", "send command".
+description: "工业级串口 (COM/ttyUSB) 设备发现、指令收发、帧解析与 VOFA+ 遥测抓取。Trigger on: serial, uart, com port, vofa+, baudrate。"
 license: Apache-2.0
 metadata:
   version: v1.2.0

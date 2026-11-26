@@ -1,10 +1,7 @@
 ---
 name: cortex-m-pyocd
 version: 1.2.0
-description: >-
-  Controls ARM Cortex-M firmware programming, chip erasing, target discovery, and
-  hardware debugging using pyOCD across Windows and Linux environments.
-  Trigger on: "pyocd", "flash firmware", "st-link", "cmsis-dap", "daplink", "erase chip", "mcu debug", "burn hex".
+description: "ARM Cortex-M 固件烧录、擦除、探针发现与硬件调试 (pyOCD Win/Linux)。Trigger on: pyocd, flash firmware, st-link, cmsis-dap, burn hex。"
 license: Apache-2.0
 metadata:
   version: v1.2.0

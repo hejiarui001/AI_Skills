@@ -1,12 +1,7 @@
 ---
 name: gcp-airflow-composer-suite
 version: 3.0.0
-description: >-
-  Cloud Composer & Apache Airflow Master Suite: DAG authoring (Airflow 2 & 3), environment
-  performance tuning & autoscaling recommendations, cross-version migration, Root Cause Analysis (RCA)
-  troubleshooting, declarative resource provisioning (deployment.yaml), and multi-pipeline orchestration.
-  Trigger on: "Composer", "Airflow", "Cloud Composer", "Airflow DAG", "DAG authoring",
-  "Airflow migration", "Composer RCA", "Composer troubleshooting", "orchestration-pipelines".
+description: "Cloud Composer & Airflow 运维套件：Airflow 2/3 DAG 编写、弹性扩缩容、迁移、RCA 排障与声明式部署。Trigger on: Composer, Airflow, DAG authoring, Composer RCA。"
 license: Apache-2.0
 metadata:
   version: v3.0.0

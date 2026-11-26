@@ -1,12 +1,7 @@
 ---
 name: notebook-data-science
 version: 2.0.0
-description: >-
-  Data Science & Interactive Notebook Suite: Enforces machine learning best practices
-  (clustering, classification, regression, time-series forecasting, statistical tests, model comparison)
-  and Jupyter Notebook structuring, execution hygiene, %%bqsql magics, and publication-ready visualization.
-  Trigger on: "machine learning", "ML", "data analysis", "clustering", "classification",
-  "regression", "time series", "Jupyter", "notebook", "ipynb", "%%bqsql", "data science".
+description: "数据科学与 Jupyter Notebook 规范：ML 最佳实践（分类/回归/聚类/预测）与单元格幂等执行卫生。Trigger on: machine learning, ML, data analysis, Jupyter, notebook, ipynb。"
 license: Apache-2.0
 metadata:
   version: v2.0.0

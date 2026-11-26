@@ -1,11 +1,7 @@
 ---
 name: everything-search
 version: 1.0.0
-description: >-
-  Searches the user's entire Windows filesystem in sub-milliseconds using the local
-  voidtools Everything engine. Use when the user asks to find, locate, or search for files,
-  code, project directories, datasheets, SOLIDWORKS models, or documents across their drives
-  (e.g., "帮我搜一下电脑里的xx文件", "找一下所有的.ioc工程", "找找看最近修改的固件").
+description: "voidtools Everything 本地全盘毫秒级极速文件检索。Trigger on: 搜一下文件, 找工程, 找.ioc, 搜索本地文件。"
 license: Apache-2.0
 metadata:
   version: v1.0.0

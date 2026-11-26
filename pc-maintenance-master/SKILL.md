@@ -1,14 +1,7 @@
 ---
 name: pc-maintenance-master
 version: 2.3.0
-description: >-
-  Comprehensive Windows PC maintenance, system diagnostics, memory optimization, startup app auditing,
-  hardware monitoring, disk cleanup toolkit, cross-OS sync conflict auditing (Syncthing/Git locks),
-  and strict Zero Desktop Intrusion for this computer.
-  Integrates Sysinternals (RAMMap, Autoruns, Process Explorer, TCPView), WizTree, CrystalDiskInfo, HWiNFO64,
-  QuickLook, UniGetUI, FreeFileSync, voidtools Everything, BleachBit, and native PowerShell diagnostics.
-  Use when user asks to analyze memory, clean up computer, tune system performance, audit startup apps,
-  check disk health, monitor hardware temperature/power, update apps, audit sync conflicts, or manage background services.
+description: "Windows 电脑系统运维与 40 款兵器库管家：内存优化、垃圾清理、自启/进程/硬件监控与跨端同步冲突扫雷。Trigger on: 清理电脑, 内存优化, 硬件监控, sync conflict, 电脑卡顿。"
 license: Apache-2.0
 metadata:
   version: v2.3.0

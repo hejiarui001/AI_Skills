@@ -1,12 +1,7 @@
 ---
 name: embedded-stm32-rules
 version: 1.11.0
-description: >-
-  Enforces professional embedded C/C++ development guidelines and PIA (Progressive
-  Instance-driven Architecture) for STM32 microcontrollers, ARM Cortex-M architecture,
-  and hardware abstraction layer (HAL/LL). Use when writing, reviewing, refactoring,
-  or designing STM32 firmware, peripheral drivers (UART, SPI, I2C, DMA, ADC, PWM, CAN),
-  cooperative time-sliced task schedulers, FreeRTOS integration, or VOFA+ debugging protocols.
+description: "STM32 嵌入式 C/C++ 编码军规与 PIA 四层架构：HAL/LL 外设驱动 (UART/SPI/DMA/PWM)、调度器与 VOFA+ 协议。"
 license: Apache-2.0
 metadata:
   version: v1.11.0

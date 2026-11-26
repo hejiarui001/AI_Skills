@@ -1,10 +1,7 @@
 ---
 name: managing-python-dependencies
 version: 1.1.0
-description: >-
-  Ensures proper Python dependency management, avoiding global pip install, enforcing
-  virtual environment isolation, and adhering to project-specific tooling (uv, poetry, pipenv, conda, venv).
-  Trigger on: "pip install", "python dependency", "requirements.txt", "virtualenv", "venv", "poetry", "uv add".
+description: "Python 虚拟环境与依赖隔离铁律：严禁全局 pip install，按优先级探测 uv/poetry/pipenv/conda/venv。Trigger on: pip install, python dependency, requirements.txt, venv, uv。"
 license: Apache-2.0
 metadata:
   version: v1.1.0

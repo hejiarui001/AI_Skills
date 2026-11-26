@@ -1,12 +1,7 @@
 ---
 name: gcp-data-engineering
 version: 3.0.0
-description: >-
-  GCP Data Engineering Pipeline Suite: Declarative data transformations with dbt & Dataform SQLX,
-  stream/batch pipeline processing with Apache Beam (Dataflow), Dataproc Serverless PySpark,
-  automated data cleaning (Dataplex), Cloud Bigtable row key schema design, and Lakehouse federated catalogs (Databricks/AWS Glue).
-  Trigger on: "dbt", "Dataform", "SQLX", "Dataflow", "Apache Beam", "Dataproc", "Spark",
-  "PySpark", "data cleaning", "Bigtable", "Lakehouse", "Iceberg catalog", "data pipeline".
+description: "GCP 全栈数据管道套件：dbt/Dataform SQLX、Dataflow (Beam)、Dataproc PySpark、数据清洗与 Bigtable。Trigger on: dbt, Dataform, SQLX, Dataflow, Dataproc, PySpark, Bigtable。"
 license: Apache-2.0
 metadata:
   version: v3.0.0

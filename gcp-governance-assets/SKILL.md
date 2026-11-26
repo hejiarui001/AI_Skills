@@ -1,12 +1,7 @@
 ---
 name: gcp-governance-assets
 version: 3.0.0
-description: >-
-  GCP Governance, Discovery & Data Apps Suite: Application Default Credentials (ADC) pre-flight authentication verification,
-  automated data asset discovery (BigQuery/Spanner/BigLake metadata), CLI resource attribution compliance,
-  cross-platform Schema Mapping Manifestos, and modern interactive data dashboard apps (React + Vite / Streamlit).
-  Trigger on: "GCP auth", "ADC verification", "discover data assets", "resource attribution",
-  "schema mapping", "data dashboard", "building data apps", "chat with your data".
+description: "GCP 治理与数据应用套件：ADC 认证校验、资产拓扑发现、资源标签归因、Schema 映射与 Streamlit/React 数据大屏。Trigger on: GCP auth, discover data assets, data dashboard。"
 license: Apache-2.0
 metadata:
   version: v3.0.0

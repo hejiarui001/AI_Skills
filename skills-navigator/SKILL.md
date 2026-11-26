@@ -1,12 +1,7 @@
 ---
 name: skills-navigator
 version: 1.10.0
-description: >-
-  Skills command center, update monitor, release gate verifier, and quick navigation guide. Trigger when the
-  user says "指令", "命令", "技能", "技能清单", "有哪些技能", "怎么用", "快捷指令", "检查更新",
-  "更新技能", "修复技能", "skill-repair", "技能报错", "menu", "help", or asks about newly added skills. Displays all active skills
-  with clear example prompts, automatically checks for upstream skill updates, verifies release gates, fixes damaged skill manifests, and
-  proactively guides user workflow.
+description: "技能库总控台：全量技能导航、上游更新、损坏修复与发布门禁校验。Trigger on: 指令, 技能, 技能清单, 检查更新, 更新技能, 修复技能, menu, help。"
 license: Apache-2.0
 metadata:
   version: v1.10.0

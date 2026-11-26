@@ -1,7 +1,7 @@
 ---
 name: google-sync-guard
 version: 1.0.0
-description: Real-time network probe, offline write-ahead caching, and auto-replay gateway for Google Workspace (Sheets, Docs, Drive, Calendar) and cloud sync. Use when writing to Google Sheets/Docs/Drive, checking proxy health, caching offline data, or synchronizing pending local queues to cloud.
+description: "Google Workspace (Sheets/Docs/Drive/Calendar) 实时网络探针、断网熔断与离线 WAL 缓存重放网关。"
 ---
 
 # Google Sync Guard (云同步卫士与熔断容灾网关)
