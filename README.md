@@ -49,7 +49,7 @@
 | 技能标识 | 当前版本 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- |
 | **`invoice-audit-master`** | `1.10.0` | 高校/竞赛发票全生命周期智能审计、对账凑单与 11 列报销总账生成 | [SKILL.md](./invoice-audit-master/SKILL.md) |
-| **`pc-maintenance-master`** | `2.2.0` | Sysinternals 内存优化、启动项体检、服务治理、硬件监控、Sunshine 与 headless CLI/JSON 模式 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
+| **`pc-maintenance-master`** | `2.3.0` | Sysinternals 内存优化、启动项体检、硬件监控、跨端同步冲突扫雷与 headless 模式 | [SKILL.md](./pc-maintenance-master/SKILL.md) |
 | **`everything-search`** | `1.0.0` | voidtools Everything 本地全盘毫秒级极速检索与文件调阅 | [SKILL.md](./everything-search/SKILL.md) |
 | **`zotero-assistant`** | `1.0.0` | Zotero 本地文献库只读检索、芯片 Datasheet 与学术元数据调阅 | [SKILL.md](./zotero-assistant/SKILL.md) |
 | **`git-worklog-reporter`** | `1.0.0` | 本地 Git 提交提取与高管级研发日报/周报结构化撰写 | [SKILL.md](./git-worklog-reporter/SKILL.md) |
@@ -74,8 +74,8 @@
 ### 5. Agent 运行治理与元能力 (Governance & Meta-Skills Suite - 5 项)
 | 技能标识 | 当前版本 | 整合吸收的原技能 | 核心能力与架构定位 | 入口文档 |
 | :--- | :---: | :--- | :--- | :--- |
-| **`session-checkpoint-advisor`** | `1.1.0` | - | 长会话膨胀治理、物理隔离定心丸、视觉锚点指纹、DoD终极验收与破局续接 | [SKILL.md](./session-checkpoint-advisor/SKILL.md) |
-| **`skills-navigator`** | `1.9.0` | `skill-repair` | 技能总控台、指令索引、24 技能多维扫描、上游更新与安装损坏修复一体化管家 | [SKILL.md](./skills-navigator/SKILL.md) |
+| **`session-checkpoint-advisor`** | `1.2.0` | - | 本地 0 Token 会话内省、二轮空转熔断、网络悬空门禁与免探核准零延迟接力 | [SKILL.md](./session-checkpoint-advisor/SKILL.md) |
+| **`skills-navigator`** | `1.10.0` | `skill-repair` | 技能总控台、24 技能多维扫描、机器发布校验门禁、上游更新与修复一体化管家 | [SKILL.md](./skills-navigator/SKILL.md) |
 | **`notebook-data-science`** | `2.0.0` | `ml-best-practices`<br>`notebook-guidance` | **数据科学与交互式笔记本规范**：机器学习建模评估范式 (ML Best Practices) 与 Jupyter Notebook 交互式数据分析规约 | [SKILL.md](./notebook-data-science/SKILL.md) |
 | **`accidental-data-loss-prevention`**| `1.0.0` | - | 高危破坏性操作防御机制（DROP / RM / DELETE 强制拦截确认） | [SKILL.md](./accidental-data-loss-prevention/SKILL.md) |
 | **`managing-python-dependencies`** | `1.1.0` | - | Python 运行环境与依赖隔离治理、多包管理器探测与防全局污染守则 (脱水至40行) | [SKILL.md](./managing-python-dependencies/SKILL.md) |

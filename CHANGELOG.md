@@ -6,6 +6,29 @@
 
 ---
 
+## [v3.0.0] - 2026-11-26 (底层致错根因重构 · 零 Token 会话内省 + 机器发布门禁 + 跨端冲突扫雷)
+
+**Tag**: `v3.0.0` | **重大重构与升级**: `session-checkpoint-advisor` (`v1.2.0`), `skills-navigator` (`v1.10.0`), `pc-maintenance-master` (`v2.3.0`)
+
+<details open>
+<summary>🌟 防错机制架构级重塑 (Systemic Anti-Error Architecture v3.0.0)</summary>
+
+基于对 94 场生产历史会话（1151 步小主机、47 轮代理调试、15,878 冲突文件雪崩）中 AI 致错底层根因的系统剖析，建立**确定性机器校验取代人工记忆自觉**的四大演进体系：
+
+* **`session-checkpoint-advisor` 升级至 v1.2.0**：
+  - **本地 0 Token 自我内省引擎**：`analyze_checkpoint.py` 原生直接读取最新 `transcript.jsonl`，精准输出每轮提问 `[HH:MM]` 视觉锚点指纹、负载 Token 估算与“连续空转重复区间”高亮；
+  - **二轮不过即熔断守则**：同一故障连续 2 轮未收敛严禁继续猜测性补丁，强制切回拐点或取证穿透；
+  - **网络悬空态防锁死门禁**：回退前自动探活本地 `7897` 代理端口，杜绝切代理掉线后带着半截故障网络回退；
+  - **零延迟极简接力**：Prompt 携带带状态签名的 **确定性免探核准印章 (Pre-Verified Stamp)**（新会话跳过重复 `git status`）、**单一权威 SSOT 指针**与**脱敏外部私密凭据指针**。
+* **`skills-navigator` 升级至 v1.10.0（发布终局机器门禁）**：
+  - 新增 [`scripts/verify_release_gate.py`](./skills-navigator/scripts/verify_release_gate.py)：全自动核验所有技能三段式版本、`SKILL.md` <80 行门禁、全量 Python 脚本 `py_compile` 静态编译、脏污文件清零及 `CHANGELOG` 与本地 Git Tag 一致性（根除漏打 Tag）。
+* **`pc-maintenance-master` 升级至 v2.3.0（跨端同步冲突防雪崩）**：
+  - 新增 [`scripts/sync_conflict_audit.py`](./pc-maintenance-master/scripts/sync_conflict_audit.py)：递归扫雷并一键无损清理跨系统 (NTFS/POSIX) 同步产生的 `.sync-conflict-*` 副本、`.syncthing.*.tmp`、Git `index.lock` 及 `__pycache__`，并固化 Syncthing `ignorePerms="true"` / `<maxConflicts>0</maxConflicts>` 防线。
+
+</details>
+
+---
+
 ## [v2.9.0] - 2026-11-24 (RouterOS 运维技能新增二层硬件卸载、Bridge Horizon 端口隔离与规则有效性断言规约)
 
 **Tag**: `v2.9.0` | **功能演进**: `routeros-network-master` (`v1.3.0`)
